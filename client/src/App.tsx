@@ -1,9 +1,11 @@
+import Logo from '../src/assets/logo.png';
 
 const App: React.FC = () => {
-return <div>
-  dr3am-hom3
-</div>
-}
-
+  return (
+    <div>
+      <img src={Logo} alt="header__logo" />
+    </div>
+  );
+};
 
 export default App;
