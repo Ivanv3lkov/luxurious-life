@@ -1,20 +1,18 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-// const { auth } = require('./middlewares/authMiddleware');
-// const { errorHandler } = require('./middlewares/errorHandlerMiddleware');
-const router = require('./router');
+const routes = require('../routes');
 
 module.exports = (app) => {
+
   app.use(express.urlencoded({ extended: false }));
+
+  app.use(bodyParser.json());
 
   app.use(express.static('../public'));
 
   app.use(cookieParser());
 
-  // app.use(auth);
-
-  // app.use(errorHandler);
-
-  app.use(router);
+  app.use(routes);
 }
