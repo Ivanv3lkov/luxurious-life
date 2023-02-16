@@ -1,20 +1,20 @@
 const express = require('express');
 const dotenv = require('dotenv');
-dotenv.config();
-const { PORT, DB_CONNECTION_STRING } = process.env;
 
-const databaseInit = require('../config/database');
-const expressInit = require('../config/express');
+const initializeDatabase = require('./config/database');
+const initializeExpress = require('./config/express');
+
+dotenv.config();
 
 const app = express();
 
-expressInit(app);
+initializeExpress(app);
 
-databaseInit(DB_CONNECTION_STRING)
+initializeDatabase()
   .then(() => {
-    console.log('Database connection established!');
-    app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+    console.log('Connected to MongoDB!');
+    app.listen(process.env.PORT, () => console.log(`Server is listening on port ${process.env.PORT}!`));
   })
-  .catch((err) => {
-    console.log('Cannot connect to database:', err);
+  .catch((error) => {
+    console.log('Cannot connect to database:', error);
   });

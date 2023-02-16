@@ -2,7 +2,7 @@
 
 ## :pencil2: About The Project
 
-This is my project for the React course in SoftUni. It was crated with React, Express and Mongoose. It is for people who wants to easly buy or sale homes. 
+This is my project for the React course in SoftUni. It was created with React, Express, MongoDB and Mongoose and it's for people who wants to share their dream homes. 
 
 ## Installation and usage
  
@@ -36,14 +36,14 @@ The guest pages are:
 * Home
 * Login
 * Register
-* Home for sale
+* My Dream Homes
 * Details
 
 # :lock: Private
 
 The logged-in users are:
 
-* Sell my home
+* Share their dream homes
 * User Profile
 * **Functionality**
   <br/>
