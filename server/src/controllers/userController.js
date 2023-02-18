@@ -91,7 +91,7 @@ exports.register = async (req, res, next) => {
     const error = new HttpError('Could not create user, please try again.', 500);
     return next(error);
   }
-
+  //reminder
   const createdUser = new User({
     name,
     email,
