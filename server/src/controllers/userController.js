@@ -1,12 +1,26 @@
-const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 
 const User = require('../models/User');
 const HttpError = require('../utils/httpErrorHelper');
 const { createUserToken } = require('../services/authService');
+const { SALT_ROUNDS, COOKIE_SESSION_NAME } = require('../constants/constants');
 
-router.post('/login', async (req, res, next) => {
+exports.getUsers = async (req, res, next) => {
+  let users;
+  try {
+    users = await User.find({}, '-password');
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+  res.json({ users: users.map(user => user.toObject({ getters: true })) });
+};
+
+exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
@@ -44,18 +58,19 @@ router.post('/login', async (req, res, next) => {
     return next(error);
   }
 
-  res.cookie(process.env.COOKIE_SESSION_NAME, token, { httpOnly: true });
-});
+  res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
+  res.status(200).json(`Hello ${existingUser.name}. You're now logged in.`);
+};
 
-router.post('/register', async (req, res, next) => {
+exports.register = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new HttpError('Invalid inputs passed, please check your data.', 422);
     return next(error);
   }
-  
+
   const { name, email, password } = req.body;
- 
+
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
@@ -71,7 +86,7 @@ router.post('/register', async (req, res, next) => {
 
   let hashedPassword;
   try {
-    hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
+    hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
   } catch (err) {
     const error = new HttpError('Could not create user, please try again.', 500);
     return next(error);
@@ -80,9 +95,9 @@ router.post('/register', async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    image: req.file.path,
+    // image: req.file.path,
     password: hashedPassword,
-    dreamHomes: []
+    // homes: []
   });
 
   try {
@@ -94,14 +109,12 @@ router.post('/register', async (req, res, next) => {
 
   let token;
   try {
-    token = createUserToken(existingUser);
+    token = createUserToken(createdUser);
   } catch (err) {
     const error = new HttpError('Signing up failed, please try again later.', 500);
     return next(error);
   }
 
-  res.status(201).cookie(process.env.COOKIE_SESSION_NAME, token, { httpOnly: true });
-});
-
-module.exports = router;
-
+  res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
+  res.status(201).json({ userId: createdUser.id, name: createdUser.name, email: createdUser.email });
+};

@@ -2,7 +2,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const routes = require('../routes');
+const userRoutes = require('../routes/userRoutes');
+const homeRoutes = require('../routes/homeRoutes');
 
 module.exports = (app) => {
 
@@ -14,5 +15,6 @@ module.exports = (app) => {
 
   app.use(cookieParser());
 
-  app.use(routes);
+  app.use('/api/homes', homeRoutes);
+  app.use('/api/users', userRoutes);
 }
