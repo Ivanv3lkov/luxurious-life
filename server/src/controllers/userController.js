@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const HttpError = require('../utils/httpErrorHelper');
 const { createUserToken } = require('../services/authService');
-const { SALT_ROUNDS, COOKIE_SESSION_NAME } = require('../constants/constants');
+const { SALT_ROUNDS } = require('../constants/constants');
 
 exports.getUsers = async (req, res, next) => {
   let users;
@@ -58,8 +58,11 @@ exports.login = async (req, res, next) => {
     return next(error);
   }
 
-  res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
-  res.status(200).json(`Hello ${existingUser.name}. You're now logged in.`);
+  res.json({
+    userId: existingUser.id,
+    email: existingUser.email,
+    token: token
+  });
 };
 
 exports.register = async (req, res, next) => {
@@ -91,13 +94,13 @@ exports.register = async (req, res, next) => {
     const error = new HttpError('Could not create user, please try again.', 500);
     return next(error);
   }
-  //reminder
+
   const createdUser = new User({
     name,
     email,
-    // image: req.file.path,
+    image: req.file.path,
     password: hashedPassword,
-    // homes: []
+    homes: []
   });
 
   try {
@@ -115,6 +118,7 @@ exports.register = async (req, res, next) => {
     return next(error);
   }
 
-  res.cookie(COOKIE_SESSION_NAME, token, { httpOnly: true });
-  res.status(201).json({ userId: createdUser.id, name: createdUser.name, email: createdUser.email });
+  res
+    .status(201)
+    .json({ userId: createdUser.id, email: createdUser.email, token: token });
 };
