@@ -55,19 +55,19 @@ exports.createHome = async (req, res, next) => {
   }
 
   const { title, description, address } = req.body;
-
-  let coordinates;
-  try {
-    coordinates = await getCoordsForAddress(address);
-  } catch (error) {
-    return next(error);
-  }
+  
+  // let coordinates;
+  // try {
+  //   coordinates = await getCoordsForAddress(address);
+  // } catch (error) {
+  //   return next(error);
+  // }
 
   const createdHome = new Home({
     title,
     description,
     address,
-    location: coordinates,
+    // location: coordinates,
     image: req.file.path,
     creator: req.userData.userId
   });
