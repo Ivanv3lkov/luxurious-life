@@ -9,7 +9,7 @@ This is my project for the React course in SoftUni. It was created with React, E
 **Clone respository:**
  
  ```
- https://github.com/Ivanv3lkov/dr3am-hom3.git
+ https://github.com/Ivanv3lkov/luxurious-life.git
  ```
  
  * To run client app
