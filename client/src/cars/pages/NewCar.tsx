@@ -11,18 +11,14 @@ import { useForm } from '../../shared/hooks/useForm';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import { AuthContext } from '../../shared/context/authContext';
 
-import './HomeForm.css';
+import './CarForm.css';
 
-type InitialHomeFormInputs = {
-  title: {
+type InitialCarFormInputs = {
+  model: {
     value: string;
     isValid: boolean;
   };
   description: {
-    value: string;
-    isValid: boolean;
-  };
-  address: {
     value: string;
     isValid: boolean;
   };
@@ -32,20 +28,16 @@ type InitialHomeFormInputs = {
   };
 };
 
-const NewHome: React.FC = () => {
+const NewCar = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [formState, inputHandler] = useForm<InitialHomeFormInputs, boolean>(
+  const [formState, inputHandler] = useForm<InitialCarFormInputs, boolean>(
     {
-      title: {
+      model: {
         value: '',
         isValid: false
       },
       description: {
-        value: '',
-        isValid: false
-      },
-      address: {
         value: '',
         isValid: false
       },
@@ -59,15 +51,14 @@ const NewHome: React.FC = () => {
 
   const history = useHistory();
 
-  const homeSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
+  const carSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('title', formState.inputs.title.value);
+      formData.append('model', formState.inputs.model.value);
       formData.append('description', formState.inputs.description.value);
-      formData.append('address', formState.inputs.address.value);
       formData.append('image', formState.inputs.image.value);
-      await sendRequest('http://localhost:8000/api/homes', 'POST', formData, {
+      await sendRequest('http://localhost:8000/api/cars', 'POST', formData, {
         Authorization: 'Bearer ' + auth.token
       });
       history.push('/');
@@ -79,15 +70,15 @@ const NewHome: React.FC = () => {
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="home-form" onSubmit={homeSubmitHandler}>
+      <form className="car-form" onSubmit={carSubmitHandler}>
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
-          id="title"
+          id="model"
           element="input"
           type="text"
-          label="Title"
+          label="Model"
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid title."
+          errorText="Please enter a valid model."
           onInput={inputHandler}
         />
         <Input
@@ -98,21 +89,13 @@ const NewHome: React.FC = () => {
           errorText="Please enter a valid description (at least 5 characters)."
           onInput={inputHandler}
         />
-        <Input
-          id="address"
-          element="input"
-          label="Address"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid address."
-          onInput={inputHandler}
-        />
         <ImageUpload id="image" onInput={inputHandler} errorText="Please provide an image." />
         <Button type="submit" disabled={!formState.isValid}>
-          Add Home
+          Add Car
         </Button>
       </form>
     </>
   );
 };
 
-export default NewHome;
+export default NewCar;

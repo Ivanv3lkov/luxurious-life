@@ -1,4 +1,4 @@
-.home-form {
+.car-form {
   position: relative;
   list-style: none;
   margin: 0 auto;
@@ -10,6 +10,6 @@
   background: white;
 }
 
-.home-form__buttons {
+.car-form__buttons {
   text-align: center;
 }

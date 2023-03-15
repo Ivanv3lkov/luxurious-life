@@ -1,4 +1,4 @@
-# dr3am-hom3
+# luxurious-life
 
 ## :pencil2: About The Project
 
@@ -36,15 +36,15 @@ The guest pages are:
 * Home
 * Login
 * Register
-* My Dream Homes
-* Details
+* TBD
+* TBD
 
 # :lock: Private
 
 The logged-in users are:
 
-* Share their dream homes
-* User Profile
+* TBD
+* TBD
 * **Functionality**
   <br/>
   :white_medium_small_square: Home - create, edit, delete.

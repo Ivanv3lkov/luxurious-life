@@ -1,0 +1,9 @@
+.user-home__btn-add {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .user-home__btn-add {
+    text-align: center;
+  }
+}

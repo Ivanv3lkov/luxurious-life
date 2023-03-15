@@ -28,6 +28,7 @@ const UsersList: React.FC<Props> = ({ users }) => {
           image={user.image}
           name={user.name}
           homeCount={user.homes.length}
+          carCount={user.cars.length}
         />
       ))}
     </ul>

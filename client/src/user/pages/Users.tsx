@@ -6,13 +6,14 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/Lo
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 
 export type User = {
-  email: string,
-  homes: object[],
-  image: string
-  id: string,
-  name: string,
-  _id: string
-  }
+  email: string;
+  homes: object[];
+  cars: object[];
+  image: string;
+  id: string;
+  name: string;
+  _id: string;
+};
 
 const Users: React.FC = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -22,7 +23,7 @@ const Users: React.FC = () => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest('http://localhost:8000/api/users');
-        
+
         setLoadedUsers(responseData.users);
       } catch (error) {}
     };

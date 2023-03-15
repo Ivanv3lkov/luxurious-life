@@ -1,20 +1,16 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import Users from './user/pages/Users';
 import UserHomes from './homes/pages/UserHomes';
 import NewHome from './homes/pages/NewHome';
-// import UserHomes from './places/pages/UserHomes';
-// import UpdateHomes from './places/pages/UpdateHome';
+import UpdateHome from './homes/pages/UpdateHome';
+import UserCars from './cars/pages/UserCars';
+import NewCar from './cars/pages/NewCar';
+import UpdateCar from './cars/pages/UpdateCar';
 import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/authContext';
 import { useAuth } from './shared/hooks/useAuth';
-
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -33,9 +29,21 @@ const App = () => {
         <Route path="/homes/new" exact>
           <NewHome />
         </Route>
-        {/* <Route path="/homes/:homeId">
+        <Route path="/homes/:homeId">
           <UpdateHome />
-        </Route> */}
+        </Route>
+        <Route path="/:userId/cars" exact>
+          <UserCars />
+        </Route>
+        <Route path="/cars/new" exact>
+          <NewCar />
+        </Route>
+        <Route path="/cars/:carId">
+          <UpdateCar />
+        </Route>
+        <Route path="/:userId/homes-and-cars" exact>
+         <h1>Main</h1>
+        </Route>
         <Redirect to="/" />
       </Switch>
     );

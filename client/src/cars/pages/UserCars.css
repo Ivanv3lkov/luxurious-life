@@ -1,0 +1,9 @@
+.user-car__btn-add {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .user-car__btn-add {
+    text-align: center;
+  }
+}

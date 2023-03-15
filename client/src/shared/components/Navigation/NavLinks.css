@@ -24,7 +24,7 @@
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-  background: #f8df00;
+  background: #b0e0e6;
   border-color: #292929;
   color: #292929;
 }
@@ -48,14 +48,19 @@
   color: white;
 }
 
-.nav-links__logout_btn {
+.nav-links__li {
   display: flex; 
   align-items: center; 
 }
 
-.nav-links__logout_btn_span {
+.nav-links__li span {
   padding-left: 5px;
 }
+
+.nav-links__li svg {
+  font-size: 25px;
+}
+
 @media (min-width: 768px) {
   .nav-links {
     flex-direction: row;

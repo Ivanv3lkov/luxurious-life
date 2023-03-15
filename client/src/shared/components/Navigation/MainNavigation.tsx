@@ -34,9 +34,9 @@ const MainNavigation: React.FC = () => {
           <span />
           <span />
         </button>
-        <h1 className="main-navigation__title">
-          <Link to="/">Your Homes</Link>
-        </h1>
+        <h2 className="main-navigation__title">
+          <Link to="/">Luxurious Life</Link>
+        </h2>
         <nav className="main-navigation__header-nav">
           <NavLinks />
         </nav>

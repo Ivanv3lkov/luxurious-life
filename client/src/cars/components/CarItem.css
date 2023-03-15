@@ -1,0 +1,55 @@
+.car-item {
+  margin: 1rem 0;
+}
+
+.car-item__content {
+  padding: 0;
+}
+
+.car-item__info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.car-item__image {
+  width: 100%;
+  height: 12.5rem;
+  margin-right: 1.5rem;
+}
+
+.car-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.car-item__info h2,
+.car-item__info h3,
+.car-item__info p {
+  margin: 0 0 0.5rem 0;
+}
+
+.car-item__actions {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+
+.car-item__modal-content {
+  padding: 0;
+}
+
+.car-item__modal-actions {
+  text-align: right;
+}
+
+.car-item__actions button,
+.car-item__actions a {
+  margin: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .car-item__image {
+    height: 20rem;
+  } 
+}

@@ -10,13 +10,14 @@ type Props = {
   image: string;
   name: string;
   homeCount: number;
+  carCount: number;
 };
 
-const UserItem: React.FC<Props> = ({ id, image, name, homeCount }) => {
+const UserItem: React.FC<Props> = ({ id, image, name, homeCount, carCount }) => {
   return (
     <li className="user-item">
       <Card className="user-item__content">
-        <Link to={`/${id}/homes`}>
+        <Link to={`/${id}/homes-and-cars`}>
           <div className="user-item__image">
             <Avatar image={`http://localhost:8000/${image}`} alt={name} />
           </div>
@@ -24,6 +25,9 @@ const UserItem: React.FC<Props> = ({ id, image, name, homeCount }) => {
             <h2>{name}</h2>
             <h3>
               {homeCount} {homeCount === 1 ? 'Home' : 'Homes'}
+            </h3>
+            <h3>
+              {carCount} {carCount === 1 ? 'Car' : 'Cars'}
             </h3>
           </div>
         </Link>

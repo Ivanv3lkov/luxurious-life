@@ -46,4 +46,6 @@
 
 .user-item__info h3 {
   margin: 0;
+  display: inline-block;
+  padding-right: 10px;
 }
