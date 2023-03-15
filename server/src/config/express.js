@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 const userRoutes = require('../routes/userRoutes');
 const homeRoutes = require('../routes/homeRoutes');
+const carRoutes = require('../routes/carRoutes');
 const HttpError = require('../utils/httpErrorHelper');
 
 module.exports = (app) => {
@@ -21,7 +22,7 @@ module.exports = (app) => {
   app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
   app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader(
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -33,6 +34,7 @@ module.exports = (app) => {
 
   app.use('/api/homes', homeRoutes);
   app.use('/api/users', userRoutes);
+  app.use('/api/cars', carRoutes);
 
   app.use(() => {
     const error = new HttpError('Could not find this route.', 404);
