@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { MdHomeWork } from 'react-icons/md';
 import { IoIosPeople } from 'react-icons/io';
+import { IoCarSportSharp } from 'react-icons/io5';
 import { SiGnuprivacyguard } from 'react-icons/si';
 
 import { AuthContext } from '../../context/authContext';
@@ -32,7 +33,7 @@ const NavLinks: React.FC = () => {
       {auth.isLoggedIn && (
         <li>
           <NavLink to={`/${auth.userId}/cars`} className="nav-links__li">
-            <MdHomeWork />
+            <IoCarSportSharp />
             <span>My Cars</span>
           </NavLink>
         </li>

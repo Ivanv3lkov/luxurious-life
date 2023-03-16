@@ -19,7 +19,7 @@ type Props = {
   onDeleteHome: (deletedHomeId: string) => void;
 };
 
-const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
+const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {  
   if (items.length === 0) {
     return (
       <div className="home-list">

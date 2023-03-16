@@ -17,7 +17,7 @@ const UserItem: React.FC<Props> = ({ id, image, name, homeCount, carCount }) => 
   return (
     <li className="user-item">
       <Card className="user-item__content">
-        <Link to={`/${id}/homes-and-cars`}>
+        <Link to={`/${id}/all-user-items`}>
           <div className="user-item__image">
             <Avatar image={`http://localhost:8000/${image}`} alt={name} />
           </div>

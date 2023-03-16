@@ -11,6 +11,7 @@ import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import { AuthContext } from './shared/context/authContext';
 import { useAuth } from './shared/hooks/useAuth';
+import Items from './user/pages/Items';
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -41,8 +42,8 @@ const App = () => {
         <Route path="/cars/:carId">
           <UpdateCar />
         </Route>
-        <Route path="/:userId/homes-and-cars" exact>
-         <h1>Main</h1>
+        <Route path="/:userId/all-user-items" exact>
+          <Items />
         </Route>
         <Redirect to="/" />
       </Switch>
