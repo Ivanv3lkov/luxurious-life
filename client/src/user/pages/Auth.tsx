@@ -19,14 +19,14 @@ import './Auth.css';
 
 export type InitialAuthFormInputs = {
   email: {
-    value: string,
-    isValid: boolean
-  },
+    value: string;
+    isValid: boolean;
+  };
   password: {
-    value: string,
-    isValid: boolean
-  },
-}
+    value: string;
+    isValid: boolean;
+  };
+};
 
 const Auth: React.FC = () => {
   const auth = useContext(AuthContext);
