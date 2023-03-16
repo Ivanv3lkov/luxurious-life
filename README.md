@@ -24,7 +24,7 @@ This is my project for the React course in SoftUni. It was created with React, E
  ```
     cd server
     npm install
-    npm run dev
+    npm start
  ```
  
  <br/>
