@@ -2,7 +2,7 @@
 
 ## :pencil2: About The Project
 
-This is my project for the React course in SoftUni. It was created with React, Express, MongoDB and Mongoose and it's for people who wants to share their dream homes. 
+This is my project for the React course in SoftUni. It was created with React, Express, MongoDB and Mongoose and it's for people who wants to share their luxurios lifestyle. 
 
 ## Installation and usage
  
