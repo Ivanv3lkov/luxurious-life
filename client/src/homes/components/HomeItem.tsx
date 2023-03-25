@@ -1,13 +1,14 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
+import { StoreState } from '../../store';
+import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import Card from '../../shared/components/UIElements/Card/Card';
 import Button from '../../shared/components/FormElements/Button/Button';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import Map from '../../shared/components/UIElements/Map/Map';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
-import { AuthContext } from '../../shared/context/authContext';
-import { useHttpClient } from '../../shared/hooks/useHttpClient';
 
 import './HomeItem.css';
 
@@ -32,8 +33,8 @@ const HomeItem: React.FC<Props> = ({
   creatorId,
   onDelete
 }) => {
+  const { accessToken, userId } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState<boolean>(false);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
@@ -49,7 +50,7 @@ const HomeItem: React.FC<Props> = ({
     setShowConfirmModal(false);
     try {
       await sendRequest(`http://localhost:8000/api/homes/${id}`, 'DELETE', null, {
-        Authorization: 'Bearer ' + auth.token
+        Authorization: 'Bearer ' + accessToken
       });
       onDelete(id);
     } catch (err) {}
@@ -106,9 +107,9 @@ const HomeItem: React.FC<Props> = ({
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {auth.userId === creatorId && <Button to={`/homes/${id}`}>EDIT</Button>}
+            {userId === creatorId && <Button to={`/homes/${id}`}>EDIT</Button>}
 
-            {auth.userId === creatorId && (
+            {userId === creatorId && (
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>

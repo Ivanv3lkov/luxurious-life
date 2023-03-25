@@ -9,7 +9,6 @@ import Button from '../../shared/components/FormElements/Button/Button';
 
 import './UserCars.css';
 
-
 const UserCars: React.FC = () => {
   const [loadedCars, setLoadedCars] = useState<Car[]>([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();

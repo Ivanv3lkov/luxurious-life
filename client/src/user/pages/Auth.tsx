@@ -1,5 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { useForm } from '../../shared/hooks/useForm';
+import { useHttpClient } from '../../shared/hooks/useHttpClient';
+import { authSuccess } from '../../store/user/userActions';
 import Card from '../../shared/components/UIElements/Card/Card';
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
@@ -11,9 +15,6 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE
 } from '../../shared/util/validators';
-import { useForm } from '../../shared/hooks/useForm';
-import { useHttpClient } from '../../shared/hooks/useHttpClient';
-import { AuthContext } from '../../shared/context/authContext';
 
 import './Auth.css';
 
@@ -29,7 +30,7 @@ export type InitialAuthFormInputs = {
 };
 
 const Auth: React.FC = () => {
-  const auth = useContext(AuthContext);
+  const dispatch = useDispatch()
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -52,7 +53,8 @@ const Auth: React.FC = () => {
       setFormData(
         {
           ...formState.inputs,
-          name: undefined,
+          firstName: undefined,
+          lastName: undefined,
           image: undefined
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
@@ -61,7 +63,11 @@ const Auth: React.FC = () => {
       setFormData(
         {
           ...formState.inputs,
-          name: {
+          firstName: {
+            value: '',
+            isValid: false
+          },
+          lastName: {
             value: '',
             isValid: false
           },
@@ -90,22 +96,22 @@ const Auth: React.FC = () => {
           }),
           { 'Content-Type': 'application/json' }
         );
-        auth.login(responseData.userId, responseData.token);
+        dispatch(authSuccess(responseData));
       } catch (err) {}
     } else {
       try {
         const formData = new FormData();
-        formData.append('email', formState.inputs.email.value);
-        formData.append('name', formState.inputs.name.value);
-        formData.append('password', formState.inputs.password.value);
+        formData.append('firstName', formState.inputs.firstName.value);
+        formData.append('lastName', formState.inputs.lastName.value);
         formData.append('image', formState.inputs.image.value);
+        formData.append('email', formState.inputs.email.value);
+        formData.append('password', formState.inputs.password.value);
         const responseData = await sendRequest(
           'http://localhost:8000/api/users/register',
           'POST',
           formData
         );
-
-        auth.login(responseData.userId, responseData.token);
+        dispatch(authSuccess(responseData));
       } catch (err) {}
     }
   };
@@ -115,27 +121,36 @@ const Auth: React.FC = () => {
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}
-        <h2>Login Required</h2>
+        <h2>{isLoginMode ? 'Login' : 'Registration'}</h2>
         <hr />
         <form onSubmit={authSubmitHandler}>
           {!isLoginMode && (
-            <Input
-              element="input"
-              id="name"
-              type="text"
-              label="Your Name"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Please enter a name."
-              onInput={inputHandler}
-            />
-          )}
-          {!isLoginMode && (
-            <ImageUpload
-              center
-              id="image"
-              onInput={inputHandler}
-              errorText="Please provide an image."
-            />
+            <>
+              <Input
+                element="input"
+                id="firstName"
+                type="text"
+                label="First Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter your first name."
+                onInput={inputHandler}
+              />
+              <Input
+                element="input"
+                id="lastName"
+                type="text"
+                label="Last Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter your last name."
+                onInput={inputHandler}
+              />
+              <ImageUpload
+                center
+                id="image"
+                onInput={inputHandler}
+                errorText="Please provide an image."
+              />
+            </>
           )}
           <Input
             element="input"

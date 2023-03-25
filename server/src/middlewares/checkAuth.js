@@ -7,11 +7,11 @@ const checkAuth = (req, res, next) => {
     return next();
   }
   try {
-    const token = req.headers.authorization.split(' ')[1];
-    if (!token) {
+    const accessToken = req.headers.authorization.split(' ')[1];
+    if (!accessToken) {
       throw new Error('Authentication failed!');
     }
-    const decodedToken = jwt.verify(token, process.env.SECRET);
+    const decodedToken = jwt.verify(accessToken, process.env.SECRET);
     req.userData = { userId: decodedToken.userId };
     next();
   } catch (err) {

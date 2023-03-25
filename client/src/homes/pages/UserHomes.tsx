@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import HomeList, { Home } from '../components/HomeList';
-import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
@@ -38,16 +37,7 @@ const UserHomes: React.FC = () => {
         </div>
       )}
       {!isLoading && loadedHomes && (
-        <>
-          {loadedHomes.length > 0 && (
-            <div className="user-home__btn-add">
-              <Button to="/homes/new" size="big">
-                Add Home
-              </Button>
-            </div>
-          )}
-          <HomeList items={loadedHomes} onDeleteHome={homeDeletedHandler} />
-        </>
+        <HomeList items={loadedHomes} onDeleteHome={homeDeletedHandler} />
       )}
     </>
   );

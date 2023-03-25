@@ -1,5 +1,8 @@
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { StoreState } from './store';
+import Profie from './user/pages/Profile';
 import Users from './user/pages/Users';
 import UserHomes from './homes/pages/UserHomes';
 import NewHome from './homes/pages/NewHome';
@@ -9,16 +12,23 @@ import NewCar from './cars/pages/NewCar';
 import UpdateCar from './cars/pages/UpdateCar';
 import Auth from './user/pages/Auth';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
-import { AuthContext } from './shared/context/authContext';
-import { useAuth } from './shared/hooks/useAuth';
 import Items from './user/pages/Items';
+import { logout } from './store/user/userActions';
+import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
+import AuthVerify from './shared/hooks/useAuthVerify';
 
 const App = () => {
-  const { token, login, logout, userId } = useAuth();
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state: StoreState) => state.user);
 
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+  
   let routes;
 
-  if (token) {
+  if (isLoggedIn) {
     routes = (
       <Switch>
         <Route path="/" exact>
@@ -42,8 +52,11 @@ const App = () => {
         <Route path="/cars/:carId">
           <UpdateCar />
         </Route>
-        <Route path="/:userId/all-user-items" exact>
+        <Route path="/:userId/all-items" exact>
           <Items />
+        </Route>
+        <Route path="/:userId/profile" exact>
+          <Profie />
         </Route>
         <Redirect to="/" />
       </Switch>
@@ -54,9 +67,6 @@ const App = () => {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route path="/:userId/homes" exact>
-          <UserHomes />
-        </Route>
         <Route path="/auth">
           <Auth />
         </Route>
@@ -66,20 +76,11 @@ const App = () => {
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn: !!token,
-        token: token,
-        userId: userId,
-        login: login,
-        logout: logout
-      }}
-    >
-      <Router>
-        <MainNavigation />
-        <main>{routes}</main>
-      </Router>
-    </AuthContext.Provider>
+    <>
+      <MainNavigation />
+      <main>{routes}</main>
+      <AuthVerify logOut={logOut}/>
+    </>
   );
 };
 

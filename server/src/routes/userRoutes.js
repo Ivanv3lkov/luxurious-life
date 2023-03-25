@@ -12,7 +12,10 @@ router.post(
   '/register',
   fileUpload.single('image'),
   [
-    check('name')
+    check('firstName')
+      .not()
+      .isEmpty(),
+      check('lastName')
       .not()
       .isEmpty(),
     check('email')

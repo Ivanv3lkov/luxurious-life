@@ -1,19 +1,20 @@
-import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { StoreState } from '../../../store';
+import { logout } from '../../../store/user/userActions';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { MdHomeWork } from 'react-icons/md';
 import { IoIosPeople } from 'react-icons/io';
 import { IoCarSportSharp } from 'react-icons/io5';
 import { SiGnuprivacyguard } from 'react-icons/si';
-
-import { AuthContext } from '../../context/authContext';
+import { CgProfile } from 'react-icons/cg';
 
 import './NavLinks.css';
 
 const NavLinks: React.FC = () => {
-  const auth = useContext(AuthContext);
-
+  const dispatch = useDispatch();
+  const { isLoggedIn, userId } = useSelector((state: StoreState) => state.user);
   return (
     <ul className="nav-links">
       <li>
@@ -22,35 +23,39 @@ const NavLinks: React.FC = () => {
           <span>All Users</span>
         </NavLink>
       </li>
-      {auth.isLoggedIn && (
-        <li>
-          <NavLink to={`/${auth.userId}/homes`} className="nav-links__li">
-            <MdHomeWork />
-            <span>My Homes</span>
-          </NavLink>
-        </li>
+      {isLoggedIn && (
+        <>
+          <li>
+            <NavLink to={`/${userId}/homes`} className="nav-links__li">
+              <MdHomeWork />
+              <span>My Homes</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/${userId}/cars`} className="nav-links__li">
+              <IoCarSportSharp />
+              <span>My Cars</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/${userId}/profile`} className="nav-links__li">
+              <CgProfile />
+              <span>Profile</span>
+            </NavLink>
+          </li>
+          <li>
+            <button onClick={() => dispatch(logout())} className="nav-links__li">
+              <AiOutlineLogout /> <span>Logout</span>
+            </button>
+          </li>
+        </>
       )}
-      {auth.isLoggedIn && (
-        <li>
-          <NavLink to={`/${auth.userId}/cars`} className="nav-links__li">
-            <IoCarSportSharp />
-            <span>My Cars</span>
-          </NavLink>
-        </li>
-      )}
-      {!auth.isLoggedIn && (
+      {!isLoggedIn && (
         <li>
           <NavLink to="/auth" className="nav-links__li">
             <SiGnuprivacyguard />
             <span>Authenticate</span>
           </NavLink>
-        </li>
-      )}
-      {auth.isLoggedIn && (
-        <li>
-          <button onClick={auth.logout} className="nav-links__li">
-            <AiOutlineLogout /> <span>Logout</span>
-          </button>
         </li>
       )}
     </ul>

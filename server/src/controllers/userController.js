@@ -11,10 +11,7 @@ exports.getUsers = async (req, res, next) => {
   try {
     users = await User.find({}, '-password');
   } catch (err) {
-    const error = new HttpError(
-      'Fetching users failed, please try again later.',
-      500
-    );
+    const error = new HttpError('Fetching users failed, please try again later.', 500);
     return next(error);
   }
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
@@ -50,18 +47,20 @@ exports.login = async (req, res, next) => {
     return next(error);
   }
 
-  let token;
+  let accessToken;
   try {
-    token = createUserToken(existingUser);
+    accessToken = createUserToken(existingUser);
   } catch (err) {
     const error = new HttpError('Login failed, please try again later.', 500);
     return next(error);
   }
 
   res.json({
+    accessToken: accessToken,
     userId: existingUser.id,
-    email: existingUser.email,
-    token: token
+    firstName: existingUser.firstName,
+    lastName: existingUser.lastName,
+    email: existingUser.email
   });
 };
 
@@ -72,8 +71,7 @@ exports.register = async (req, res, next) => {
     return next(error);
   }
 
-  const { name, email, password } = req.body;
-
+  const { firstName, lastName, email, password } = req.body;
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
@@ -89,6 +87,7 @@ exports.register = async (req, res, next) => {
 
   let hashedPassword;
   try {
+    
     hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
   } catch (err) {
     const error = new HttpError('Could not create user, please try again.', 500);
@@ -96,11 +95,13 @@ exports.register = async (req, res, next) => {
   }
 
   const createdUser = new User({
-    name,
+    firstName,
+    lastName,
     email,
     image: req.file.path,
     password: hashedPassword,
-    homes: []
+    homes: [],
+    cars: []
   });
 
   try {
@@ -110,9 +111,9 @@ exports.register = async (req, res, next) => {
     return next(error);
   }
 
-  let token;
+  let accessToken;
   try {
-    token = createUserToken(createdUser);
+    accessToken = createUserToken(createdUser);
   } catch (err) {
     const error = new HttpError('Signing up failed, please try again later.', 500);
     return next(error);
@@ -120,5 +121,11 @@ exports.register = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token: token });
+    .json({
+      accessToken: accessToken,
+      userId: createdUser.id,
+      firstName: createdUser.firstName,
+      lastName: createdUser.lastName,
+      email: createdUser.email
+    });
 };

@@ -1,15 +1,16 @@
-import { FormEvent, useContext } from 'react';
+import { FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { StoreState } from '../../store';
+import { useForm } from '../../shared/hooks/useForm';
+import { useHttpClient } from '../../shared/hooks/useHttpClient';
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload/ImageUpload';
-import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
-import { useForm } from '../../shared/hooks/useForm';
-import { useHttpClient } from '../../shared/hooks/useHttpClient';
-import { AuthContext } from '../../shared/context/authContext';
 
 import './CarForm.css';
 
@@ -29,7 +30,7 @@ type InitialCarFormInputs = {
 };
 
 const NewCar = () => {
-  const auth = useContext(AuthContext);
+  const { accessToken } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm<InitialCarFormInputs, boolean>(
     {
@@ -59,7 +60,7 @@ const NewCar = () => {
       formData.append('description', formState.inputs.description.value);
       formData.append('image', formState.inputs.image.value);
       await sendRequest('http://localhost:8000/api/cars', 'POST', formData, {
-        Authorization: 'Bearer ' + auth.token
+        Authorization: 'Bearer ' + accessToken
       });
       history.push('/');
     } catch (err) {

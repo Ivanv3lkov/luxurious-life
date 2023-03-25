@@ -5,3 +5,13 @@
   width: 90%;
   max-width: 40rem;
 }
+
+.home-btn-add{
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .home-btn-add {
+    text-align: center;
+  }
+}
