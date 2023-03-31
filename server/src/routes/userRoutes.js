@@ -5,6 +5,7 @@ const userController = require('../controllers/userController');
 const fileUpload = require('../middlewares/fileUpload');
 
 router.get('/', userController.getUsers);
+router.get('/:userId', userController.getUserById);
 
 router.post('/login', userController.login);
 

@@ -6,6 +6,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
+  image: string;
 }
 
 export interface AuthSuccess {
@@ -30,7 +31,8 @@ export const authSuccess = (user: User): AuthSuccess => {
       userId: user.userId,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.email
+      email: user.email,
+      image: user.image,
     }
   };
 };

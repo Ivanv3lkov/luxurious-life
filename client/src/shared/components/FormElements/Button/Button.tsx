@@ -7,7 +7,7 @@ type Props = {
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset' | undefined;
   href?: string;
-  size?: string;
+  size?: 'small' | 'big' | 'enormous';
   inverse?: boolean;
   danger?: boolean;
   to?: string;

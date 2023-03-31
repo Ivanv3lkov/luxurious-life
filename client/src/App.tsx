@@ -2,7 +2,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { StoreState } from './store';
-import Profie from './user/pages/Profile';
+import Profile from './user/pages/Profile';
 import Users from './user/pages/Users';
 import UserHomes from './homes/pages/UserHomes';
 import NewHome from './homes/pages/NewHome';
@@ -56,7 +56,7 @@ const App = () => {
           <Items />
         </Route>
         <Route path="/:userId/profile" exact>
-          <Profie />
+          <Profile />
         </Route>
         <Redirect to="/" />
       </Switch>

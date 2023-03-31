@@ -17,6 +17,19 @@ exports.getUsers = async (req, res, next) => {
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
 
+exports.getUserById = async (req, res, next) => {
+  const userId = req.params.userId;
+  
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError('Fetching user failed, please try again later.', 500);
+    return next(error);
+  }
+  res.json({ user: user.toObject({ getters: true }) });
+}
+
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -60,7 +73,8 @@ exports.login = async (req, res, next) => {
     userId: existingUser.id,
     firstName: existingUser.firstName,
     lastName: existingUser.lastName,
-    email: existingUser.email
+    email: existingUser.email,
+    image: existingUser.image,
   });
 };
 
@@ -87,7 +101,7 @@ exports.register = async (req, res, next) => {
 
   let hashedPassword;
   try {
-    
+
     hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
   } catch (err) {
     const error = new HttpError('Could not create user, please try again.', 500);

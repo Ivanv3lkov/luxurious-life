@@ -12,12 +12,12 @@ const Items: React.FC = () => {
   return (
     <div className="items">
       <div className="items__button">
-        <Button to={`/${userId}/homes`} size={'enormous'} inverse>
+        <Button to={`/${userId}/homes`} size="enormous" inverse>
           <MdHomeWork />
         </Button>
       </div>
       <div className="items__button">
-        <Button to={`/${userId}/cars`} size={'enormous'} inverse>
+        <Button to={`/${userId}/cars`} size="enormous" inverse>
           <IoCarSportSharp />
         </Button>
       </div>

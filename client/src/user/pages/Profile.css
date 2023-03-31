@@ -1,4 +1,29 @@
-.profile {
+.profile-item__content {
   margin: 0 auto;
   width: 600px;
+}
+.profile-item__card {
+  background-color: #0e2f44;
+  color: white;
+}
+
+.profile-item__card h1 {
+  text-align: center;
+  background-color: #0e2f44;
+  color: white;
+}
+
+.profile-item__image {
+  margin: 0 auto;
+  width: 15rem;
+  height: 15rem;
+}
+
+.profile-item__btns {
+  text-align: center;
+}
+
+.profile-item__items-count h2 {
+  padding-left: 5rem;
+  display:inline;
 }

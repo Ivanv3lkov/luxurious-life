@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Map: React.FC<Props> = ({ className, center, zoom }) => {
-  const mapRef: any = useRef();
+  const mapRef = useRef<any>();
 
   useEffect(() => {
     const map = new window.google.maps.Map(mapRef.current, {

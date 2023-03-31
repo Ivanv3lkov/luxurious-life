@@ -95,7 +95,7 @@ const Auth: React.FC = () => {
             password: formState.inputs.password.value
           }),
           { 'Content-Type': 'application/json' }
-        );
+        );        
         dispatch(authSuccess(responseData));
       } catch (err) {}
     } else {

@@ -6,6 +6,7 @@ export interface UserReducerState {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
+  image: string | null;
   error: string | null;
   isLoggedIn: boolean;
 }
@@ -16,6 +17,7 @@ const initialState: UserReducerState = {
   firstName: null,
   lastName: null,
   email: null,
+  image: null,
   error: null,
   isLoggedIn: false,
 };
@@ -33,6 +35,7 @@ export const userReducer = (
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
+        image: action.payload.image,
         isLoggedIn: true,
         error: null
       };
@@ -48,6 +51,7 @@ export const userReducer = (
         userId: null,
         firstName: null,
         lastName: null,
+        image: null,
         email: null,
         isLoggedIn: false,
       };
