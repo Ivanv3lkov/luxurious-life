@@ -51,6 +51,9 @@ The logged-in users are:
   <br/>
   :white_medium_small_square: Home - create, edit, delete.
     <br/>
+     <br/>
+  :white_medium_small_square: Car - create, edit, delete.
+    <br/>
   :white_medium_small_square: User - edit, delete.
 
 # :computer:  Built With
