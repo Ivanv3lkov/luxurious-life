@@ -33,18 +33,20 @@ This is my project for the React course in SoftUni. It was created with React, E
 
 The guest pages are:
 
-* Home
+* All Users
 * Login
 * Register
-* TBD
 * TBD
 
 # :lock: Private
 
 The logged-in users are:
 
-* TBD
-* TBD
+* All Users
+* My Homes
+* My Cars
+* Profile
+
 * **Functionality**
   <br/>
   :white_medium_small_square: Home - create, edit, delete.
