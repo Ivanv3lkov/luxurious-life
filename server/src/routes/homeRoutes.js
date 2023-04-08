@@ -5,6 +5,8 @@ const homeController = require('../controllers/homeController');
 const fileUpload = require('../middlewares/fileUpload');
 const checkAuth = require('../middlewares/checkAuth');
 
+router.get('/', homeController.getAllHomes);
+
 router.get('/:homeId', homeController.getHomeById);
 
 router.get('/user/:uid', homeController.getHomesByUserId);

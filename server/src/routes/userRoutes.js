@@ -16,7 +16,7 @@ router.post(
     check('firstName')
       .not()
       .isEmpty(),
-      check('lastName')
+    check('lastName')
       .not()
       .isEmpty(),
     check('email')
@@ -26,5 +26,19 @@ router.post(
   ],
   userController.register
 );
+
+router.patch(
+  '/:userId',
+  [
+    check('firstName')
+      .not()
+      .isEmpty(),
+    check('lastName')
+      .not()
+      .isEmpty()
+  ],
+  userController.updateUserProfile
+);
+router.delete('/:userId', userController.deleteUser)
 
 module.exports = router;

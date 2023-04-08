@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { StoreState } from '../../store';
+import { authUpdate, logout } from '../../store/user/userActions';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import Card from '../../shared/components/UIElements/Card/Card';
+import Modal from '../../shared/components/UIElements/Modal/Modal';
 import Avatar from '../../shared/components/UIElements/Avatar/Avatar';
 import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
@@ -12,41 +14,74 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/Lo
 import './Profile.css';
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const { firstName, lastName, email, image, userId } = useSelector(
-    (state: StoreState) => state.user
-  );
-  const [profileState, setProfileState] = useState<{ sharedHomes: number; sharedCars: number }>({
-    sharedHomes: 0,
-    sharedCars: 0
-  });
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+  const { firstName, lastName, email, image, userId, accessToken, homesCount, carsCount } =
+    useSelector((state: StoreState) => state.user);
+
+  const showDeleteWarningHandler = () => setShowConfirmModal(true);
+
+  const cancelDeleteHandler = () => setShowConfirmModal(false);
+
+  const confirmDeleteHandler = async () => {
+    setShowConfirmModal(false);
+    try {
+      await sendRequest(`http://localhost:8000/api/users/${userId}`, 'DELETE', null, {
+        Authorization: 'Bearer ' + accessToken
+      });
+      dispatch(logout());
+    } catch (err) {}
+  };
 
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchProfile = async () => {
       try {
         const responseData = await sendRequest(`http://localhost:8000/api/users/${userId}`);
 
-        setProfileState((prevState) => {
-          return {
-            ...prevState,
-            sharedHomes: responseData.user.homes.length,
-            sharedCars: responseData.user.cars.length
-          };
-        });
+        dispatch(
+          authUpdate({
+            firstName: responseData.user.firstName,
+            lastName: responseData.user.lastName,
+            homesCount: responseData.user.homes.length,
+            carsCount: responseData.user.cars.length
+          })
+        );
       } catch (err) {}
     };
-    fetchCars();
-  }, [sendRequest, userId]);
+    fetchProfile();
+  }, [dispatch, sendRequest, userId]);
 
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
+      <Modal
+        show={showConfirmModal}
+        onCancel={cancelDeleteHandler}
+        header="Are you sure?"
+        footerClass="profile-item__modal-actions"
+        footer={
+          <>
+            <Button inverse onClick={cancelDeleteHandler}>
+              CANCEL
+            </Button>
+            <Button danger onClick={confirmDeleteHandler}>
+              DELETE
+            </Button>
+          </>
+        }
+      >
+        <p>
+          Do you want to proceed and delete your account? Please note that it can't be undone
+          thereafter.
+        </p>
+      </Modal>
       {isLoading && (
         <div className="center">
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && profileState && (
+      {!isLoading && email && (
         <div className="profile-item__content">
           <Card className="profile-item__card">
             <header>
@@ -58,21 +93,19 @@ const Profile = () => {
               </div>
             </header>
             <hr></hr>
-            <h2>First Name: {firstName}</h2>
-            <h2>Last Name: {lastName}</h2>
-            <h2>Email: {email}</h2>
+            <h3>First Name: {firstName}</h3>
+            <h3>Last Name: {lastName}</h3>
+            <h3>Email: {email}</h3>
             <hr></hr>
-            <div className='profile-item__items-count'>
-              <h2>Shared homes: {profileState.sharedHomes}</h2>
-              <h2>Shared cars: {profileState.sharedCars}</h2>
+            <div className="profile-item__items-count">
+              <h3>Shared homes: {homesCount}</h3>
+              <h3>Shared cars: {carsCount}</h3>
             </div>
             <hr></hr>
-            <div className="profile-item__btns">
-              <Button to={'/'} size="big">
-                Edit
-              </Button>
-              <Button size="big" danger>
-                Delete
+            <div className="profile-item__actions">
+              <Button to={`/${userId}/profile/edit`}>EDIT</Button>
+              <Button danger onClick={showDeleteWarningHandler}>
+                DELETE
               </Button>
             </div>
           </Card>

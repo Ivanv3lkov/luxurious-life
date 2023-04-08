@@ -34,7 +34,7 @@ type InitialHomeFormInputs = {
 };
 
 const NewHome: React.FC = () => {
-  const { accessToken } = useSelector((state: StoreState) => state.user);
+  const { accessToken, userId } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm<InitialHomeFormInputs, boolean>(
     {
@@ -71,9 +71,9 @@ const NewHome: React.FC = () => {
       await sendRequest('http://localhost:8000/api/homes', 'POST', formData, {
         Authorization: 'Bearer ' + accessToken
       });
-      history.push('/');
+      history.push(`/${userId}/homes`);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -109,7 +109,7 @@ const NewHome: React.FC = () => {
         />
         <ImageUpload id="image" onInput={inputHandler} errorText="Please provide an image." />
         <Button type="submit" disabled={!formState.isValid}>
-          Add Home
+          ADD HOME
         </Button>
       </form>
     </>

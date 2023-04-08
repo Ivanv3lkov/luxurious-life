@@ -1,7 +1,15 @@
 .profile-item__content {
+  position: relative;
+  list-style: none;
   margin: 0 auto;
-  width: 600px;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
 }
+
 .profile-item__card {
   background-color: #0e2f44;
   color: white;
@@ -19,11 +27,31 @@
   height: 15rem;
 }
 
-.profile-item__btns {
+.profile-item__items-count {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-item__modal-actions {
+  text-align: right;
+}
+
+.profile-item__actions {
+  padding-top: 1.2rem;
   text-align: center;
 }
 
-.profile-item__items-count h2 {
-  padding-left: 5rem;
-  display:inline;
+.profile-form {
+  position: relative;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+}
+
+.profile-form__buttons {
+  text-align: center;
 }

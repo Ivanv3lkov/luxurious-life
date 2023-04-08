@@ -1,10 +1,12 @@
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 const { validationResult } = require('express-validator');
 
 const User = require('../models/User');
 const HttpError = require('../utils/httpErrorHelper');
 const { createUserToken } = require('../services/authService');
 const { SALT_ROUNDS } = require('../constants/constants');
+const { default: mongoose } = require('mongoose');
 
 exports.getUsers = async (req, res, next) => {
   let users;
@@ -19,7 +21,7 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
   const userId = req.params.userId;
-  
+
   let user;
   try {
     user = await User.findById(userId);
@@ -75,6 +77,8 @@ exports.login = async (req, res, next) => {
     lastName: existingUser.lastName,
     email: existingUser.email,
     image: existingUser.image,
+    homesCount: existingUser.homes.length,
+    carsCount: existingUser.cars.length,
   });
 };
 
@@ -140,6 +144,75 @@ exports.register = async (req, res, next) => {
       userId: createdUser.id,
       firstName: createdUser.firstName,
       lastName: createdUser.lastName,
-      email: createdUser.email
+      email: createdUser.email,
+      image: createdUser.image,
+      homesCount: createdUser.homes.length,
+      carsCount: createdUser.cars.count
     });
+};
+
+exports.updateUserProfile = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new HttpError('Invalid inputs passed, please check your data.', 422));
+  }
+
+  const { firstName, lastName } = req.body;
+  const userId = req.params.userId;
+
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not update user.', 500);
+    return next(error);
+  }
+
+
+  user.firstName = firstName;
+  user.lastName = lastName;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not update user.', 500);
+    return next(error);
+  }
+
+  res.status(200).json({ user: user.toObject({ getters: true }) });
+};
+
+exports.deleteUser = async (req, res, next) => {
+  const userId = req.params.userId;
+
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not delete user.', 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError('Could not find user for this id.', 404);
+    return next(error);
+  }
+
+  const imagePath = user.image;
+
+  try {
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await user.remove({ session: sess });  
+    await sess.commitTransaction();
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not delete user.', 500);
+    return next(error);
+  }
+
+  fs.unlink(imagePath, err => {
+    console.log(err);
+  });
+
+  res.status(200).json({ message: 'Deleted user.' });
 };

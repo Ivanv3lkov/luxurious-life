@@ -25,19 +25,14 @@ const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
       <div className="home-list">
         <Card>
           <h2>No homes found. Maybe create one?</h2>
-          <Button to="/homes/new">Add Home</Button>
+          <Button to="/homes/new">Add new home</Button>
         </Card>
       </div>
     );
   }
-
+  
   return (
     <>
-      <div className="home-btn-add">
-        <Button to="/homes/new" size="big">
-          Add Home
-        </Button>
-      </div>
       <ul className="home-list">
         {items.map((home: Home) => (
           <HomeItem

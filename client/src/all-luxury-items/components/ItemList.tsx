@@ -1,5 +1,5 @@
 import Card from '../../shared/components/UIElements/Card/Card';
-import CarItem from './CarItem';
+import CarItem from '../../cars/components/CarItem'
 import Button from '../../shared/components/FormElements/Button/Button';
 
 import './CarList.css';
@@ -23,7 +23,7 @@ const CarList: React.FC<Props> = ({ items, onDeleteCar }) => {
       <div className="car-list center">
         <Card>
           <h2>No cars found. Maybe create one?</h2>
-          <Button to="/cars/new">Add new car</Button>
+          <Button to="/cars/new">Add Car</Button>
         </Card>
       </div>
     );

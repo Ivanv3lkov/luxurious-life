@@ -1,21 +1,19 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdHomeWork } from 'react-icons/md';
 import { IoCarSportSharp } from 'react-icons/io5';
 
-import './Items.css';
+import './AllLuxuryItems.css';
 
-const Items: React.FC = () => {
-  const { userId } = useParams<{ userId: string }>();
-
+const AllLuxuryItems: React.FC = () => {
   return (
     <div className="item__links">
       <div className="item__link">
-        <Link to={`/${userId}/homes`}>
+        <Link to={`/homes`}>
           <MdHomeWork color="#0e2f44" size="20rem"/>
         </Link>
       </div>
       <div className="item__link">
-        <Link to={`/${userId}/cars`}>
+        <Link to={`/cars`}>
           <IoCarSportSharp color="#0e2f44" size="20rem"/>
         </Link>
       </div>
@@ -23,4 +21,4 @@ const Items: React.FC = () => {
   );
 };
 
-export default Items;
+export default AllLuxuryItems;

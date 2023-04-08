@@ -2,27 +2,36 @@ import { Link } from 'react-router-dom';
 
 import Avatar from '../../../shared/components/UIElements/Avatar/Avatar';
 import Card from '../../../shared/components/UIElements/Card/Card';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../../../store';
 
 import './UserItem.css';
 
 type Props = {
   id: string;
   image: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   homeCount: number;
   carCount: number;
 };
 
-const UserItem: React.FC<Props> = ({ id, image, name, homeCount, carCount }) => {
+const UserItem: React.FC<Props> = ({ id, image, firstName, lastName, homeCount, carCount }) => {
+  const { userId } = useSelector((state: StoreState) => state.user);
+  const isMyProfile = userId === id;
+
   return (
     <li className="user-item">
       <Card className="user-item__content">
-        <Link to={`/${id}/all-items`}>
+        <Link to={`/${id}/items`}>
           <div className="user-item__image">
-            <Avatar image={`http://localhost:8000/${image}`} alt={name} />
+            <Avatar image={`http://localhost:8000/${image}`} alt={firstName} />
           </div>
           <div className="user-item__info">
-            <h2>{name}</h2>
+            <h4 className={isMyProfile? 'my-profile' : ''}>
+              {isMyProfile ? '( Me ) - ' : ''}
+              {`${firstName} ${lastName}`}
+            </h4>
             <h3>
               {homeCount} {homeCount === 1 ? 'Home' : 'Homes'}
             </h3>

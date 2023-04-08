@@ -96,6 +96,7 @@ const Auth: React.FC = () => {
           }),
           { 'Content-Type': 'application/json' }
         );        
+  
         dispatch(authSuccess(responseData));
       } catch (err) {}
     } else {
@@ -111,6 +112,7 @@ const Auth: React.FC = () => {
           'POST',
           formData
         );
+        
         dispatch(authSuccess(responseData));
       } catch (err) {}
     }

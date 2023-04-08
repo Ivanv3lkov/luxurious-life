@@ -6,6 +6,23 @@ const Car = require('../models/Car');
 const User = require('../models/User');
 const HttpError = require('../utils/httpErrorHelper');
 
+exports.getAllCars = async (req, res, next) => {
+  let cars;
+  try {
+    cars = await Car.find();
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not find any cars.', 500);
+    return next(error);
+  }
+
+  if (!cars) {
+    const error = new HttpError('Could not find any cars.', 404);
+    return next(error);
+  }
+
+  res.json({ cars: cars.map(car => car.toObject({ getters: true })) });
+};
+
 exports.getCarById = async (req, res, next) => {
   const carId = req.params.carId;
 

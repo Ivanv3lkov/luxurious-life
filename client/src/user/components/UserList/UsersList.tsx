@@ -26,7 +26,8 @@ const UsersList: React.FC<Props> = ({ users }) => {
           key={user.id}
           id={user.id}
           image={user.image}
-          name={user.name}
+          firstName={user.firstName}
+          lastName={user.lastName}
           homeCount={user.homes.length}
           carCount={user.cars.length}
         />

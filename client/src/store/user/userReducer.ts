@@ -7,6 +7,8 @@ export interface UserReducerState {
   lastName: string | null;
   email: string | null;
   image: string | null;
+  homesCount: number,
+  carsCount: number,
   error: string | null;
   isLoggedIn: boolean;
 }
@@ -18,6 +20,8 @@ const initialState: UserReducerState = {
   lastName: null,
   email: null,
   image: null,
+  homesCount: 0,
+  carsCount: 0,
   error: null,
   isLoggedIn: false,
 };
@@ -36,6 +40,8 @@ export const userReducer = (
         lastName: action.payload.lastName,
         email: action.payload.email,
         image: action.payload.image,
+        homesCount: action.payload.homesCount,
+        carsCount: action.payload.carsCount,
         isLoggedIn: true,
         error: null
       };
@@ -53,7 +59,17 @@ export const userReducer = (
         lastName: null,
         image: null,
         email: null,
+        homesCount: 0,
+        carsCount: 0,
         isLoggedIn: false,
+      };
+      case UserActionTypes.AUTH_UPDATE:
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName:  action.payload.lastName,
+        homesCount: action.payload.homesCount,
+        carsCount: action.payload.carsCount,
       };
     default:
       return state;

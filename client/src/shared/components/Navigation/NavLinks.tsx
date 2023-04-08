@@ -6,7 +6,7 @@ import { logout } from '../../../store/user/userActions';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { MdHomeWork } from 'react-icons/md';
 import { IoIosPeople } from 'react-icons/io';
-import { IoCarSportSharp } from 'react-icons/io5';
+import { IoCarSportSharp, IoDiamondOutline } from 'react-icons/io5';
 import { SiGnuprivacyguard } from 'react-icons/si';
 import { CgProfile } from 'react-icons/cg';
 
@@ -17,10 +17,16 @@ const NavLinks: React.FC = () => {
   const { isLoggedIn, userId } = useSelector((state: StoreState) => state.user);
   return (
     <ul className="nav-links">
-      <li>
-        <NavLink to="/" exact className="nav-links__li">
+        <li>
+        <NavLink to="/users" exact className="nav-links__li">
           <IoIosPeople />
           <span>All Users</span>
+        </NavLink>
+      </li>
+         <li>
+        <NavLink to="/items" exact className="nav-links__li">
+          <IoDiamondOutline />
+          <span>All Luxury Items</span>
         </NavLink>
       </li>
       {isLoggedIn && (

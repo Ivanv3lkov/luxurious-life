@@ -10,6 +10,9 @@ import Map from '../../shared/components/UIElements/Map/Map';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
+import { AiFillLike, AiFillDislike } from 'react-icons/ai';
+import { FcLike } from 'react-icons/fc';
+
 import './HomeItem.css';
 
 export type Props = {
@@ -104,15 +107,30 @@ const HomeItem: React.FC<Props> = ({
             <p>{description}</p>
           </div>
           <div className="home-item__actions">
+            <div>
+              <Button>
+                <AiFillLike size={15} />
+                <span>Like</span>
+              </Button>
+              <Button>
+                <FcLike size={15} />
+                <span>Love</span>
+              </Button>
+              <Button>
+                <AiFillDislike size={15} />
+                <span>Dislike</span>
+              </Button>
+            </div>
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {userId === creatorId && <Button to={`/homes/${id}`}>EDIT</Button>}
-
             {userId === creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
-              </Button>
+              <>
+                <Button to={`/homes/${id}`}>EDIT</Button>
+                <Button danger onClick={showDeleteWarningHandler}>
+                  DELETE
+                </Button>
+              </>
             )}
           </div>
         </Card>

@@ -30,7 +30,7 @@ type InitialCarFormInputs = {
 };
 
 const NewCar = () => {
-  const { accessToken } = useSelector((state: StoreState) => state.user);
+  const { accessToken, userId } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm<InitialCarFormInputs, boolean>(
     {
@@ -62,9 +62,9 @@ const NewCar = () => {
       await sendRequest('http://localhost:8000/api/cars', 'POST', formData, {
         Authorization: 'Bearer ' + accessToken
       });
-      history.push('/');
+      history.push(`/${userId}/cars`);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -92,7 +92,7 @@ const NewCar = () => {
         />
         <ImageUpload id="image" onInput={inputHandler} errorText="Please provide an image." />
         <Button type="submit" disabled={!formState.isValid}>
-          Add Car
+          ADD CAR
         </Button>
       </form>
     </>

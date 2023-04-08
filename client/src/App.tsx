@@ -2,12 +2,18 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { StoreState } from './store';
+import LuxuryGoods from './all-luxury-items/pages/AllLuxuryItems';
 import Profile from './user/pages/Profile';
+import UpdateProfile from './user/pages/UpdateProfile';
+
+import AllLuxuryItems from './all-luxury-items/pages/AllLuxuryItems';
 import Users from './user/pages/Users';
 import UserHomes from './homes/pages/UserHomes';
+import UserCars from './cars/pages/UserCars';
+import AllHomes from './homes/pages/AllHomes';
 import NewHome from './homes/pages/NewHome';
 import UpdateHome from './homes/pages/UpdateHome';
-import UserCars from './cars/pages/UserCars';
+import AllCars from './cars/pages/AllCars';
 import NewCar from './cars/pages/NewCar';
 import UpdateCar from './cars/pages/UpdateCar';
 import Auth from './user/pages/Auth';
@@ -25,14 +31,20 @@ const App = () => {
   const logOut = useCallback(() => {
     dispatch(logout());
   }, [dispatch]);
-  
+
   let routes;
 
   if (isLoggedIn) {
     routes = (
       <Switch>
-        <Route path="/" exact>
+         <Route path="/users" exact>
           <Users />
+        </Route>
+        <Route path="/items" exact>
+          <LuxuryGoods />
+        </Route>
+        <Route path="/homes" exact>
+          <AllHomes />
         </Route>
         <Route path="/:userId/homes" exact>
           <UserHomes />
@@ -43,6 +55,9 @@ const App = () => {
         <Route path="/homes/:homeId">
           <UpdateHome />
         </Route>
+        <Route path="/cars" exact>
+          <AllCars />
+        </Route>
         <Route path="/:userId/cars" exact>
           <UserCars />
         </Route>
@@ -52,20 +67,32 @@ const App = () => {
         <Route path="/cars/:carId">
           <UpdateCar />
         </Route>
-        <Route path="/:userId/all-items" exact>
+        <Route path="/:userId/items" exact>
           <Items />
         </Route>
         <Route path="/:userId/profile" exact>
           <Profile />
         </Route>
-        <Redirect to="/" />
+        <Route path="/:userId/profile/edit" exact>
+          <UpdateProfile />
+        </Route>
+        <Redirect to="/users" />
       </Switch>
     );
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact>
+         <Route path="/users" exact>
           <Users />
+        </Route>
+        <Route path="/items" exact>
+          <AllLuxuryItems />
+        </Route>
+        <Route path="/homes" exact>
+          <AllHomes />
+        </Route>
+        <Route path="/cars" exact>
+          <AllCars />
         </Route>
         <Route path="/auth">
           <Auth />
@@ -79,7 +106,7 @@ const App = () => {
     <>
       <MainNavigation />
       <main>{routes}</main>
-      <AuthVerify logOut={logOut}/>
+      <AuthVerify logOut={logOut} />
     </>
   );
 };

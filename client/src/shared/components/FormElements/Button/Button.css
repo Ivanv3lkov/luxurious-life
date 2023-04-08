@@ -1,6 +1,6 @@
 .button {
   font: inherit;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.8rem;
   border: 1px solid #0e2f44;
   border-radius: 4px;
   background: #0e2f44;
@@ -62,5 +62,5 @@
 }
 
 .button--enormous {
-  font-size: 14rem;
+  font-size: 16rem;
 }

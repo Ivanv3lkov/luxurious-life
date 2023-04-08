@@ -8,9 +8,9 @@ async function getCoordsForAddress(address) {
       address
     )}&key=${process.env.GOOGLE_API_KEY}`
   );
-
+    
   const data = response.data;
-  
+    console.log(data);
   if (!data || data.status === 'ZERO_RESULTS') {
     const error = new HttpError('Could not find location for the specified address.', 422);
     throw error;

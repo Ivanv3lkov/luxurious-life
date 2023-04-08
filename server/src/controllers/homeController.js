@@ -7,6 +7,23 @@ const User = require('../models/User');
 const getCoordsForAddress = require('../utils/location');
 const HttpError = require('../utils/httpErrorHelper');
 
+exports.getAllHomes = async (req, res, next) => {
+  let homes;
+  try {
+    homes = await Home.find();
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not find any homes.', 500);
+    return next(error);
+  }
+
+  if (!homes) {
+    const error = new HttpError('Could not find any homes.', 404);
+    return next(error);
+  }
+
+  res.json({ homes: homes.map(home => home.toObject({ getters: true })) });
+};
+
 exports.getHomeById = async (req, res, next) => {
   const homeId = req.params.homeId;
 
@@ -55,7 +72,7 @@ exports.createHome = async (req, res, next) => {
   }
 
   const { title, description, address } = req.body;
-
+  console.log(address);
   let coordinates;
   
   try {

@@ -5,6 +5,8 @@ const carController = require('../controllers/carController');
 const fileUpload = require('../middlewares/fileUpload');
 const checkAuth = require('../middlewares/checkAuth');
 
+router.get('/', carController.getAllCars);
+
 router.get('/:carId', carController.getCarById);
 
 router.get('/user/:uid', carController.getCarsByUserId);

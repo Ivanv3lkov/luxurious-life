@@ -30,15 +30,18 @@
   margin-right: 1rem;
 }
 
-.user-item__info h2 {
-  font-size: 1.5rem;
+.user-item__info h4 {
   margin: 0 0 0.5rem 0;
   font-weight: normal;
   color: #ffd900;
 }
 
-.user-item:hover h2,
-.user-item:active h2,
+.user-item__info .my-profile {
+  color: #00ff26;
+}
+
+.user-item:hover h4,
+.user-item:active h4,
 .user-item:hover h3,
 .user-item:active h3 {
   color: #292929;

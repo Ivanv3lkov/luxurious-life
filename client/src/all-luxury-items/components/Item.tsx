@@ -10,8 +10,6 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
 import './CarItem.css';
-import { AiFillDislike, AiFillLike } from 'react-icons/ai';
-import { FcLike } from 'react-icons/fc';
 
 export type Props = {
   id: string;
@@ -76,27 +74,12 @@ const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, on
             <p>{description}</p>
           </div>
           <div className="car-item__actions">
-            <div>
-              <Button>
-                <AiFillLike size={15} />
-                <span>Like</span>
-              </Button>
-              <Button>
-                <FcLike size={15} />
-                <span>Love</span>
-              </Button>
-              <Button>
-                <AiFillDislike size={15} />
-                <span>Dislike</span>
-              </Button>
-            </div>
+            {userId === creatorId && <Button to={`/cars/${id}`}>EDIT</Button>}
+
             {userId === creatorId && (
-              <>
-                <Button to={`/cars/${id}`}>EDIT</Button>
-                <Button danger onClick={showDeleteWarningHandler}>
-                  DELETE
-                </Button>
-              </>
+              <Button danger onClick={showDeleteWarningHandler}>
+                DELETE
+              </Button>
             )}
           </div>
         </Card>
