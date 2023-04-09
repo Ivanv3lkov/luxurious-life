@@ -14,3 +14,12 @@
 .item__link:hover {
   cursor: pointer;
 }
+
+
+
+@media (max-width: 768px) {
+  .item__link svg {
+    margin: 3rem auto; 
+    height: 14rem;
+  }
+}
