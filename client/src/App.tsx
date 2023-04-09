@@ -1,28 +1,28 @@
+import React, { Suspense, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { StoreState } from './store';
-import LuxuryGoods from './all-luxury-items/pages/AllLuxuryItems';
-import Profile from './user/pages/Profile';
-import UpdateProfile from './user/pages/UpdateProfile';
-
-import AllLuxuryItems from './all-luxury-items/pages/AllLuxuryItems';
-import Users from './user/pages/Users';
-import UserHomes from './homes/pages/UserHomes';
-import UserCars from './cars/pages/UserCars';
-import AllHomes from './homes/pages/AllHomes';
-import NewHome from './homes/pages/NewHome';
-import UpdateHome from './homes/pages/UpdateHome';
-import AllCars from './cars/pages/AllCars';
-import NewCar from './cars/pages/NewCar';
-import UpdateCar from './cars/pages/UpdateCar';
-import Auth from './user/pages/Auth';
-import MainNavigation from './shared/components/Navigation/MainNavigation';
-import Items from './user/pages/Items';
 import { logout } from './store/user/userActions';
-import { useDispatch } from 'react-redux';
-import { useCallback } from 'react';
+
 import AuthVerify from './shared/hooks/useAuthVerify';
+import LoadingSpinner from './shared/components/UIElements/LoadingSpinner/LoadingSpinner';
+import MainNavigation from './shared/components/Navigation/MainNavigation';
+
+const Profile = React.lazy(() => import('./user/pages/Profile'));
+const UpdateProfile = React.lazy(() => import('./user/pages/UpdateProfile'));
+const AllLuxuryItems = React.lazy(() => import('./all-luxury-items/pages/AllLuxuryItems'));
+const Users = React.lazy(() => import('./user/pages/Users'));
+const UserHomes = React.lazy(() => import('./homes/pages/UserHomes'));
+const UserCars = React.lazy(() => import('./cars/pages/UserCars'));
+const AllHomes = React.lazy(() => import('./homes/pages/AllHomes'));
+const NewHome = React.lazy(() => import('./homes/pages/NewHome'));
+const UpdateHome = React.lazy(() => import('./homes/pages/UpdateHome'));
+const AllCars = React.lazy(() => import('./cars/pages/AllCars'));
+const NewCar = React.lazy(() => import('./cars/pages/NewCar'));
+const UpdateCar = React.lazy(() => import('./cars/pages/UpdateCar'));
+const Auth = React.lazy(() => import('./user/pages/Auth'));
+const Items = React.lazy(() => import('./user/pages/Items'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,11 +37,11 @@ const App = () => {
   if (isLoggedIn) {
     routes = (
       <Switch>
-         <Route path="/users" exact>
+        <Route path="/users" exact>
           <Users />
         </Route>
         <Route path="/items" exact>
-          <LuxuryGoods />
+          <AllLuxuryItems />
         </Route>
         <Route path="/homes" exact>
           <AllHomes />
@@ -82,7 +82,7 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-         <Route path="/users" exact>
+        <Route path="/users" exact>
           <Users />
         </Route>
         <Route path="/items" exact>
@@ -105,7 +105,17 @@ const App = () => {
   return (
     <>
       <MainNavigation />
-      <main>{routes}</main>
+      <main>
+        <Suspense
+          fallback={
+            <div className="center">
+              <LoadingSpinner />
+            </div>
+          }
+        >
+          {routes}
+        </Suspense>
+      </main>
       <AuthVerify logOut={logOut} />
     </>
   );
