@@ -15,9 +15,7 @@
   cursor: pointer;
 }
 
-
-
-@media (max-width: 768px) {
+@media (max-width: 620px) {
   .item__link svg {
     margin: 2rem auto; 
     height: 14rem;
