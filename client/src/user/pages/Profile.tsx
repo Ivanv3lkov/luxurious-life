@@ -27,7 +27,7 @@ const Profile = () => {
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(`http://localhost:8000/api/users/${userId}`, 'DELETE', null, {
+      await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`, 'DELETE', null, {
         Authorization: 'Bearer ' + accessToken
       });
       dispatch(logout());
@@ -37,7 +37,9 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:8000/api/users/${userId}`);
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`
+        );
 
         dispatch(
           authUpdate({
@@ -89,7 +91,7 @@ const Profile = () => {
                 <strong>Profile</strong>
               </h1>
               <div className="profile-item__image">
-                <Avatar image={`http://localhost:8000/${image}`} alt={'image'} />
+                <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={'image'} />
               </div>
             </header>
             <hr></hr>

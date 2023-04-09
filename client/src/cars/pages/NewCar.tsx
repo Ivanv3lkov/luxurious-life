@@ -59,7 +59,7 @@ const NewCar = () => {
       formData.append('model', formState.inputs.model.value);
       formData.append('description', formState.inputs.description.value);
       formData.append('image', formState.inputs.image.value);
-      await sendRequest('http://localhost:8000/api/cars', 'POST', formData, {
+      await sendRequest(process.env.REACT_APP_BACKEND_URL + '/cars', 'POST', formData, {
         Authorization: 'Bearer ' + accessToken
       });
       history.push(`/${userId}/cars`);

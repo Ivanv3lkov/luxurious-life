@@ -8,10 +8,10 @@ import Button from '../../shared/components/FormElements/Button/Button';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
-
-import './CarItem.css';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
 import { FcLike } from 'react-icons/fc';
+
+import './CarItem.css';
 
 export type Props = {
   id: string;
@@ -34,7 +34,7 @@ const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, on
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(`http://localhost:8000/api/cars/${id}`, 'DELETE', null, {
+      await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/cars/${id}`, 'DELETE', null, {
         Authorization: 'Bearer ' + accessToken
       });
       onDelete(id);
@@ -69,7 +69,7 @@ const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, on
         <Card className="car-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="car-item__image">
-            <img src={`http://localhost:8000/${image}`} alt={model} />
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={model} />
           </div>
           <div className="car-item__info">
             <h2>{model}</h2>

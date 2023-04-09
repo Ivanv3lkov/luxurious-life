@@ -14,8 +14,8 @@ const AllCars: React.FC = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:8000/api/cars`);
-        
+        const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/cars');
+
         setLoadedCars(responseData.cars);
       } catch (err) {}
     };
@@ -34,9 +34,7 @@ const AllCars: React.FC = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedCars && (
-        <CarList items={loadedCars} onDeleteCar={carDeletedHandler} />
-      )}
+      {!isLoading && loadedCars && <CarList items={loadedCars} onDeleteCar={carDeletedHandler} />}
     </>
   );
 };

@@ -18,7 +18,7 @@ const UserHomes: React.FC = () => {
   useEffect(() => {
     const fetchHomes = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:8000/api/homes/user/${userId}`);
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/homes/user/${userId}`);
         setLoadedHomes(responseData.homes);
       } catch (err) {}
     };

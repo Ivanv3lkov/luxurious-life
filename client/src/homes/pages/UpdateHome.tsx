@@ -38,7 +38,7 @@ const UpdateHome: React.FC = () => {
   useEffect(() => {
     const fetchHome = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:8000/api/homes/${homeId}`);
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/homes/${homeId}`);
         setLoadedHome(responseData.home);
         setFormData(
           {
@@ -62,7 +62,7 @@ const UpdateHome: React.FC = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:8000/api/homes/${homeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/homes/${homeId}`,
         'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,

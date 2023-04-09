@@ -13,8 +13,8 @@ const AllHomes: React.FC = () => {
 
   useEffect(() => {
     const fetchHomes = async () => {
-      try {
-        const responseData = await sendRequest(`http://localhost:8000/api/homes`);
+      try {        
+        const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/homes');
         
         setLoadedHomes(responseData.homes);
       } catch (err) {}

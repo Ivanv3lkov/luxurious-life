@@ -36,7 +36,7 @@ const UpdateProfile: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:8000/api/users/${userId}`);
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`);
         setFormData(
           {
             firstName: {
@@ -59,7 +59,7 @@ const UpdateProfile: React.FC = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:8000/api/users/${userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
         'PATCH',
         JSON.stringify({
           firstName: formState.inputs.firstName.value,

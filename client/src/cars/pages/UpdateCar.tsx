@@ -38,7 +38,7 @@ const UpdateCar: React.FC = () => {
   useEffect(() => {
     const fetchCar = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:8000/api/cars/${carId}`);
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/cars/${carId}`);
         setLoadedCar(responseData.car);
         setFormData(
           {
@@ -62,7 +62,7 @@ const UpdateCar: React.FC = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `http://localhost:8000/api/cars/${carId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/cars/${carId}`,
         'PATCH',
         JSON.stringify({
           model: formState.inputs.model.value,

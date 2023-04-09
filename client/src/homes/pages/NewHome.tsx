@@ -68,7 +68,7 @@ const NewHome: React.FC = () => {
       formData.append('description', formState.inputs.description.value);
       formData.append('address', formState.inputs.address.value);
       formData.append('image', formState.inputs.image.value);
-      await sendRequest('http://localhost:8000/api/homes', 'POST', formData, {
+      await sendRequest(process.env.REACT_APP_BACKEND_URL + '/homes', 'POST', formData, {
         Authorization: 'Bearer ' + accessToken
       });
       history.push(`/${userId}/homes`);

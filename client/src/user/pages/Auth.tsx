@@ -30,7 +30,7 @@ export type InitialAuthFormInputs = {
 };
 
 const Auth: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -88,15 +88,15 @@ const Auth: React.FC = () => {
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
-          'http://localhost:8000/api/users/login',
+          process.env.REACT_APP_BACKEND_URL + '/users/login',
           'POST',
           JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
           }),
           { 'Content-Type': 'application/json' }
-        );        
-  
+        );
+
         dispatch(authSuccess(responseData));
       } catch (err) {}
     } else {
@@ -108,11 +108,11 @@ const Auth: React.FC = () => {
         formData.append('email', formState.inputs.email.value);
         formData.append('password', formState.inputs.password.value);
         const responseData = await sendRequest(
-          'http://localhost:8000/api/users/register',
+          process.env.REACT_APP_BACKEND_URL + '/users/register',
           'POST',
           formData
         );
-        
+
         dispatch(authSuccess(responseData));
       } catch (err) {}
     }

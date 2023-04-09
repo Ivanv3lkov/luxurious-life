@@ -52,7 +52,7 @@ const HomeItem: React.FC<Props> = ({
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(`http://localhost:8000/api/homes/${id}`, 'DELETE', null, {
+      await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/homes/${id}`, 'DELETE', null, {
         Authorization: 'Bearer ' + accessToken
       });
       onDelete(id);
@@ -99,7 +99,7 @@ const HomeItem: React.FC<Props> = ({
         <Card className="home-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="home-item__image">
-            <img src={`http://localhost:8000/${image}`} alt={title} />
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={title} />
           </div>
           <div className="home-item__info">
             <h2>{title}</h2>
