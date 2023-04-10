@@ -33,16 +33,16 @@ This is my project for the React course in SoftUni. It was created with React, E
 
 The guest pages are:
 
+* Authentication - Login, Sign Up
 * All Users
-* Login
-* Register
-* TBD
+* All Luxury Items
 
 # :lock: Private
 
 The logged-in users are:
 
 * All Users
+* All Luxury Items
 * My Homes
 * My Cars
 * Profile
@@ -53,7 +53,7 @@ The logged-in users are:
     <br/>
   :white_medium_small_square: Car - create, edit, delete.
     <br/>
-  :white_medium_small_square: User - edit, delete.
+  :white_medium_small_square: User - create, edit, delete.
 
 # :computer:  Built With
 ## Back-end
@@ -65,14 +65,15 @@ The logged-in users are:
 - [Cookie Parser](https://github.com/expressjs/cookie-parser)
 - [Cors](https://github.com/expressjs/cors)
 - [Nodemon](https://github.com/remy/nodemon)
-
+- [GOOGLE MAPS API](https://developers.google.com/maps)
 ## Front-end
 
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [React](https://reactjs.org/)
-- [React Router v6](https://reactrouter.com/)
+- [React Router](https://reactrouter.com/)
 - [Redux](https://redux.js.org/)
 - [React Redux](https://react-redux.js.org/)
 - [Redux Persist](https://github.com/rt2zz/redux-persist)
 - [Redux Thunk](https://www.npmjs.com/package/redux-thunk)
+- [GOOGLE MAPS API](https://developers.google.com/maps)
