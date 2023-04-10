@@ -1,4 +1,4 @@
-# luxurious-life - ##Live in https://luxurious-life09042023.web.app/
+# luxurious-life - Live in https://luxurious-life09042023.web.app/
 
 ## :pencil2: About The Project
 
