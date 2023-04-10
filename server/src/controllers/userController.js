@@ -16,6 +16,11 @@ exports.getUsers = async (req, res, next) => {
     const error = new HttpError('Fetching users failed, please try again later.', 500);
     return next(error);
   }
+
+  if (!users) {
+    return next(new HttpError('Could not find any users.', 404));
+  }
+  
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
 
