@@ -20,7 +20,7 @@ exports.getUsers = async (req, res, next) => {
   if (!users) {
     return next(new HttpError('Could not find any users.', 404));
   }
-  
+
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
 
@@ -95,7 +95,9 @@ exports.register = async (req, res, next) => {
   }
 
   const { firstName, lastName, email, password } = req.body;
+
   let existingUser;
+
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {

@@ -32,8 +32,8 @@ module.exports = (app) => {
     next();
   });
 
-  app.use('/api/homes', homeRoutes);
   app.use('/api/users', userRoutes);
+  app.use('/api/homes', homeRoutes);
   app.use('/api/cars', carRoutes);
 
   app.use(() => {
