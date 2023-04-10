@@ -72,7 +72,7 @@ exports.createHome = async (req, res, next) => {
   }
 
   const { title, description, address } = req.body;
-  console.log(address);
+  
   let coordinates;
   
   try {

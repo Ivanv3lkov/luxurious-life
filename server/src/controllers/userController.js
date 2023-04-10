@@ -203,7 +203,7 @@ exports.deleteUser = async (req, res, next) => {
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
-    await user.remove({ session: sess });  
+    await user.remove({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError('Something went wrong, could not delete user.', 500);
