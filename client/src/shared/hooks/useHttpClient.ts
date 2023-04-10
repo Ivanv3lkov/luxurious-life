@@ -15,7 +15,7 @@ export const useHttpClient = () => {
       try {
         const response = await fetch(url, {
           method,
-          body: JSON.stringify(body),
+          body,
           headers,
           signal: httpAbortCtrl.signal
         });
