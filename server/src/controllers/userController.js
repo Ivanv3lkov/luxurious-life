@@ -147,7 +147,7 @@ exports.register = async (req, res, next) => {
       email: createdUser.email,
       image: createdUser.image,
       homesCount: createdUser.homes.length,
-      carsCount: createdUser.cars.count
+      carsCount: createdUser.cars.length
     });
 };
 
