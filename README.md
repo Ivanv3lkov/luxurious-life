@@ -1,4 +1,4 @@
-# luxurious-life
+# luxurious-life - Live in https://luxurious-life09042023.web.app/
 
 ## :pencil2: About The Project
 
@@ -65,7 +65,7 @@ The logged-in users are:
 - [Cookie Parser](https://github.com/expressjs/cookie-parser)
 - [Cors](https://github.com/expressjs/cors)
 - [Nodemon](https://github.com/remy/nodemon)
-- [GOOGLE MAPS API](https://developers.google.com/maps)
+- [Google Maps API](https://developers.google.com/maps)
 ## Front-end
 
 - [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
@@ -76,4 +76,4 @@ The logged-in users are:
 - [React Redux](https://react-redux.js.org/)
 - [Redux Persist](https://github.com/rt2zz/redux-persist)
 - [Redux Thunk](https://www.npmjs.com/package/redux-thunk)
-- [GOOGLE MAPS API](https://developers.google.com/maps)
+- [Google Maps API](https://developers.google.com/maps)
