@@ -90,16 +90,13 @@ const HomeItem: React.FC<Props> = ({
           </>
         }
       >
-        <p>
-          Do you want to proceed and delete this home? Please note that it can't be undone
-          thereafter.
-        </p>
+        <p>Do you want to proceed and delete this home?</p>
       </Modal>
       <li className="home-item">
         <Card className="home-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="home-item__image">
-            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={title} />
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
           <div className="home-item__info">
             <h2>{title}</h2>

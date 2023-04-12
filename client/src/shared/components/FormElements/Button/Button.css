@@ -38,6 +38,11 @@
   border-color: #830000;
 }
 
+.button--golden {
+  background: #bd9f28;
+  border-color: #bd9f28;
+}
+
 .button--danger:hover,
 .button--danger:active {
   background: #f34343;

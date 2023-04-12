@@ -58,16 +58,13 @@ const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, on
           </>
         }
       >
-        <p>
-          Do you want to proceed and delete this car? Please note that it can't be undone
-          thereafter.
-        </p>
+        <p>Do you want to proceed and delete this car?</p>
       </Modal>
       <li className="car-item">
         <Card className="car-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="car-item__image">
-            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={model} />
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
           <div className="car-item__info">
             <h2>{model}</h2>

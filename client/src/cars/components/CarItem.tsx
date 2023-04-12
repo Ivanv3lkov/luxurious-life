@@ -8,8 +8,10 @@ import Button from '../../shared/components/FormElements/Button/Button';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
-import { AiFillDislike, AiFillLike } from 'react-icons/ai';
-import { FcLike } from 'react-icons/fc';
+import { IoDiamondSharp } from 'react-icons/io5';
+import { FaThumbsUp } from 'react-icons/fa';
+import { FcLike, FcDislike } from 'react-icons/fc';
+import { GiDiamondHard } from 'react-icons/gi';
 
 import './CarItem.css';
 
@@ -19,13 +21,30 @@ export type Props = {
   description: string;
   image: string;
   creatorId: string;
+  reactions: {
+    likes: string[];
+    hearts: string[];
+    diamonds: string[];
+  };
   onDelete: (carId: string) => void;
 };
 
-const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, onDelete }) => {
+const CarItem: React.FC<Props> = ({
+  id,
+  model,
+  description,
+  image,
+  creatorId,
+  reactions,
+  onDelete
+}) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+  const [{ likes, hearts, diamonds }, setCarReactions] = useState(reactions);
+  const isCarLiked = userId ? likes.includes(userId) : false;
+  const isCarLoved = userId ? hearts.includes(userId) : false;
+  const isCarPriceless = userId ? diamonds.includes(userId) : false;
 
   const showDeleteWarningHandler = () => setShowConfirmModal(true);
 
@@ -38,6 +57,25 @@ const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, on
         Authorization: 'Bearer ' + accessToken
       });
       onDelete(id);
+    } catch (err) {}
+  };
+
+  const reactToCarHandler = async (buttonText: string) => {
+    try {
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/cars/${id}/reactions`,
+        'PATCH',
+        JSON.stringify({
+          carId: id,
+          currentReaction: buttonText
+        }),
+        {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + accessToken
+        }
+      );
+
+      setCarReactions(responseData.reactions);
     } catch (err) {}
   };
 
@@ -60,34 +98,39 @@ const CarItem: React.FC<Props> = ({ id, model, description, image, creatorId, on
           </>
         }
       >
-        <p>
-          Do you want to proceed and delete this car? Please note that it can't be undone
-          thereafter.
-        </p>
+        <p>Do you want to proceed and delete this car?</p>
       </Modal>
       <li className="car-item">
         <Card className="car-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="car-item__image">
-            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={model} />
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
           <div className="car-item__info">
             <h2>{model}</h2>
             <p>{description}</p>
+            <div className="car-item__reactions">
+              <FaThumbsUp size={24} />
+              {likes.length}
+              <FcLike size={24} />
+              {hearts.length}
+              <IoDiamondSharp size={24} />
+              {diamonds.length}
+            </div>
           </div>
           <div className="car-item__actions">
             <div>
-              <Button>
-                <AiFillLike size={15} />
-                <span>Like</span>
+              <Button onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}>
+                <FaThumbsUp size={15} transform={isCarLiked ? 'scale(1 -1)' : ''} />
+                {isCarLiked ? 'Unlike' : 'Like'}
               </Button>
-              <Button>
-                <FcLike size={15} />
-                <span>Love</span>
+              <Button onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}>
+                {isCarLoved ? <FcDislike size={15} /> : <FcLike size={15} />}
+                {isCarLoved ? 'Unlove' : 'Love'}
               </Button>
-              <Button>
-                <AiFillDislike size={15} />
-                <span>Dislike</span>
+              <Button onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}>
+                {isCarPriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
+                {isCarPriceless ? 'Worthless' : 'Priceless'}
               </Button>
             </div>
             {userId === creatorId && (

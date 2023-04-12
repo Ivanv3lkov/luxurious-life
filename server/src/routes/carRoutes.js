@@ -38,4 +38,6 @@ router.patch(
 
 router.delete('/:carId', carController.deleteCar);
 
+router.patch('/:carId/reactions', carController.reactions)
+
 module.exports = router;

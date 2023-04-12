@@ -10,6 +10,11 @@ export type Car = {
   description: string;
   image: string;
   creator: string;
+  reactions: {
+    likes: string[],
+    hearts: string[],
+    diamonds: string[]
+  };
 };
 
 type Props = {
@@ -39,6 +44,7 @@ const CarList: React.FC<Props> = ({ items, onDeleteCar }) => {
           model={car.model}
           description={car.description}
           creatorId={car.creator}
+          reactions={car.reactions}
           onDelete={onDeleteCar}
         />
       ))}

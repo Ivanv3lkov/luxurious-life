@@ -25,7 +25,7 @@ const UserItem: React.FC<Props> = ({ id, image, firstName, lastName, homeCount, 
       <Card className="user-item__content">
         <Link to={`/${id}/items`}>
           <div className="user-item__image">
-            <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={firstName} />
+            <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
           <div className="user-item__info">
             <h4 className={isMyProfile? 'my-profile' : ''}>

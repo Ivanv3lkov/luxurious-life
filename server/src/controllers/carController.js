@@ -183,3 +183,58 @@ exports.deleteCar = async (req, res, next) => {
 
   res.status(200).json({ message: 'Deleted car.' });
 };
+
+exports.getAllCars = async (req, res, next) => {
+  let cars;
+  try {
+    cars = await Car.find();
+  } catch (err) {
+    const error = new HttpError('Something went wrong, could not find any cars.', 500);
+    return next(error);
+  }
+
+  if (!cars) {
+    const error = new HttpError('Could not find any cars.', 404);
+    return next(error);
+  }
+
+  res.json({ cars: cars.map(car => car.toObject({ getters: true })) });
+};
+
+exports.reactions = async (req, res, next) => {
+  const userId = req.userData.userId;
+  const { carId, currentReaction } = req.body;
+
+  const method = {
+    Like: '$push',
+    Love: '$push',
+    Priceless: '$push',
+    Unlike: '$pull',
+    Unlove: '$pull',
+    Worthless: '$pull'
+  }
+  const listsOfReactions = {
+    Like: 'likes',
+    Love: 'hearts',
+    Priceless: 'diamonds',
+    Unlike: 'likes',
+    Unlove: 'hearts',
+    Worthless: 'diamonds'
+  }
+
+  Car.findByIdAndUpdate(carId, {
+    [method[currentReaction]]: { [`reactions.${listsOfReactions[currentReaction]}`]: userId }
+  }, {
+    new: true
+  }).exec((err, result) => {
+    if (err) {
+      const error = new HttpError('Something went wrong, could not add reaction to this car.', 500);
+      return next(error);
+    } else {
+      res.json(result)
+    }
+  })
+}
+
+
+

@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import './Button.css';
 
 type Props = {
-  onClick?: () => void;
+  onClick?: (value: any) => void;
   type?: 'button' | 'submit' | 'reset' | undefined;
   href?: string;
   size?: 'small' | 'big' | 'enormous';
   inverse?: boolean;
   danger?: boolean;
   to?: string;
+  golden?: boolean;
   exact?: any;
   disabled?: boolean;
   children?: ReactNode;
@@ -23,6 +24,7 @@ const Button: React.FC<Props> = ({
   size,
   inverse,
   danger,
+  golden,
   to,
   disabled,
   children
@@ -30,9 +32,11 @@ const Button: React.FC<Props> = ({
   if (href) {
     return (
       <a
-        className={`button button--${size || 'default'} ${inverse && 'button--inverse'} ${
-          danger && 'button--danger'
-        }`}
+        className={`button button--${size || 'default'} 
+          ${inverse && 'button--inverse'} 
+          ${danger && 'button--danger'} 
+          ${golden && 'button--golden'}
+        `}
         href={href}
       >
         {children}
@@ -45,7 +49,7 @@ const Button: React.FC<Props> = ({
         to={to}
         className={`button button--${size || 'default'} ${inverse && 'button--inverse'} ${
           danger && 'button--danger'
-        }`}
+        } ${golden && 'button--golden'}`}
       >
         {children}
       </Link>
@@ -55,7 +59,7 @@ const Button: React.FC<Props> = ({
     <button
       className={`button button--${size || 'default'} ${inverse && 'button--inverse'} ${
         danger && 'button--danger'
-      }`}
+      } ${golden && 'button--golden'}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
