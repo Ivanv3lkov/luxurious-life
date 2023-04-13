@@ -110,25 +110,40 @@ const CarItem: React.FC<Props> = ({
             <h2>{model}</h2>
             <p>{description}</p>
             <div className="car-item__reactions">
-              <FaThumbsUp size={24} />
-              {likes.length}
-              <FcLike size={24} />
-              {hearts.length}
-              <IoDiamondSharp size={24} />
-              {diamonds.length}
+              <h3>
+                <FaThumbsUp size={22} />
+                {likes.length}
+              </h3>
+              <h3>
+                <FcLike size={22} />
+                {hearts.length}
+              </h3>
+              <h3>
+                <IoDiamondSharp size={21} />
+                {diamonds.length}
+              </h3>
             </div>
           </div>
           <div className="car-item__actions">
             <div>
-              <Button onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}>
+              <Button
+                onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}
+                disabled={!userId}
+              >
                 <FaThumbsUp size={15} transform={isCarLiked ? 'scale(1 -1)' : ''} />
                 {isCarLiked ? 'Unlike' : 'Like'}
               </Button>
-              <Button onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}>
+              <Button
+                onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}
+                disabled={!userId}
+              >
                 {isCarLoved ? <FcDislike size={15} /> : <FcLike size={15} />}
                 {isCarLoved ? 'Unlove' : 'Love'}
               </Button>
-              <Button onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}>
+              <Button
+                onClick={(event: any) => reactToCarHandler(event.currentTarget.textContent)}
+                disabled={!userId}
+              >
                 {isCarPriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
                 {isCarPriceless ? 'Worthless' : 'Priceless'}
               </Button>

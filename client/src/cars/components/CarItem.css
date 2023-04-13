@@ -12,8 +12,18 @@
 }
 
 .car-item__reactions {
- padding-top: 10px;
+  padding-top: 10px;
 }
+
+.car-item__reactions h3 {
+  display: inline;
+  padding-left: 10px;
+}
+
+.car-item__reactions svg {
+  padding-right: 5px;
+}
+
 
 .car-item__image {
   width: 100%;
@@ -34,7 +44,7 @@
 }
 
 .car-item__actions {
-  padding: 1rem;
+  padding: 1rem 0.1rem;
   text-align: center;
   border-top: 1px solid #ccc;
 }
@@ -43,6 +53,9 @@
   padding-left: 20px;
   vertical-align: top;
   font-size: 16px;
+}
+.car-item__actions svg {
+  padding-right: 5px;
 }
 
 .car-item__modal-content {
