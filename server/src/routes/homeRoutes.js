@@ -41,4 +41,6 @@ router.patch(
 
 router.delete('/:homeId', homeController.deleteHome);
 
+router.patch('/:carId/reactions', homeController.reactions)
+
 module.exports = router;

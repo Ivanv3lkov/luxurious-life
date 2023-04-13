@@ -9,7 +9,12 @@ const homeSchema = new mongoose.Schema({
     lat: { type: Number, required: true },
     lng: { type: Number, required: true }
   },
-  creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
+  creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' },
+  reactions: {
+    likes: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+    hearts: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+    diamonds: [{ type: mongoose.Types.ObjectId, ref: 'User' }]
+  }
 });
 
 module.exports = mongoose.model('Home', homeSchema);

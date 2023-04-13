@@ -70,10 +70,11 @@ exports.addCar = async (req, res, next) => {
     return next(new HttpError('Invalid inputs passed, please check your data.', 422));
   }
 
-  const { model, description } = req.body;
+  const { model, year, description } = req.body;
 
   const createdCar = new Car({
     model,
+    year,
     description,
     image: req.file.path,
     creator: req.userData.userId
@@ -113,7 +114,7 @@ exports.updateCar = async (req, res, next) => {
     return next(new HttpError('Invalid inputs passed, please check your data.', 422));
   }
 
-  const { model, description } = req.body;
+  const { model, year, description } = req.body;
   const carId = req.params.carId;
 
   let car;
@@ -131,6 +132,7 @@ exports.updateCar = async (req, res, next) => {
 
   car.model = model;
   car.description = description;
+  car.year = year;
 
   try {
     await car.save();
@@ -235,6 +237,3 @@ exports.reactions = async (req, res, next) => {
     }
   })
 }
-
-
-

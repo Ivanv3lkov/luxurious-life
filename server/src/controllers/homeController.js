@@ -72,11 +72,12 @@ exports.createHome = async (req, res, next) => {
   }
 
   const { title, description, address } = req.body;
-  
+
   let coordinates;
-  
-  try {
+
+  try {   
     coordinates = await getCoordsForAddress(address);
+    
   } catch (error) {
     return next(error);
   }
@@ -124,8 +125,17 @@ exports.updateHome = async (req, res, next) => {
     return next(new HttpError('Invalid inputs passed, please check your data.', 422));
   }
 
-  const { title, description } = req.body;
+  const { title, description, address } = req.body;
   const homeId = req.params.homeId;
+
+  let coordinates;
+
+  try {   
+    coordinates = await getCoordsForAddress(address);
+    
+  } catch (error) {
+    return next(error);
+  }
 
   let home;
   try {
@@ -142,6 +152,8 @@ exports.updateHome = async (req, res, next) => {
 
   home.title = title;
   home.description = description;
+  home.address = address;
+  home.location = coordinates;
 
   try {
     await home.save();
@@ -194,3 +206,38 @@ exports.deleteHome = async (req, res, next) => {
 
   res.status(200).json({ message: 'Deleted home.' });
 };
+
+exports.reactions = async (req, res, next) => {
+  const userId = req.userData.userId;
+  const { homeId, currentReaction } = req.body;
+
+  const method = {
+    Like: '$push',
+    Love: '$push',
+    Priceless: '$push',
+    Unlike: '$pull',
+    Unlove: '$pull',
+    Worthless: '$pull'
+  }
+  const listsOfReactions = {
+    Like: 'likes',
+    Love: 'hearts',
+    Priceless: 'diamonds',
+    Unlike: 'likes',
+    Unlove: 'hearts',
+    Worthless: 'diamonds'
+  }
+
+  Home.findByIdAndUpdate(homeId, {
+    [method[currentReaction]]: { [`reactions.${listsOfReactions[currentReaction]}`]: userId }
+  }, {
+    new: true
+  }).exec((err, result) => {
+    if (err) {
+      const error = new HttpError('Something went wrong, could not add reaction to this home.', 500);
+      return next(error);
+    } else {
+      res.json(result)
+    }
+  })
+}
