@@ -47,7 +47,7 @@ The logged-in users are:
 * All Luxury Items
 * Different user's items /homes, cars/
 * My own cars
-* My own cars
+* My own homes
 * Profile
 
 * **Functionality**
