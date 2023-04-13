@@ -11,7 +11,7 @@
 }
 
 .profile-item__card {
-  background-color: #0e2f44;
+  background-color: #0e2f44 !important;
   color: white;
 }
 
