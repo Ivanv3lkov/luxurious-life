@@ -1,6 +1,6 @@
 # luxurious-life - Official page: https://luxurious-life09042023.web.app/
 
-## About The Project
+## About the app
 
 This is my project for the React course in SoftUni. It was created with React, TypeScript, Express, MongoDB and Mongoose and it's for people who wants to share their luxurios lifestyle. The client side of the application is hosted in Firebase while the server side is in Heroku.
 
