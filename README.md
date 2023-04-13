@@ -52,9 +52,9 @@ The logged-in users are:
 
 * **Functionality**
   <br/>
-  :white_medium_small_square: Home - create, edit, delete.
+  :white_medium_small_square: Home - create, edit, delete, add emoji reaction - like, love, priceless.
     <br/>
-  :white_medium_small_square: Car - create, edit, delete.
+  :white_medium_small_square: Car - create, edit, delete, like, love, priceless.
     <br/>
   :white_medium_small_square: User - create, edit, delete.
 
