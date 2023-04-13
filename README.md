@@ -26,7 +26,7 @@ This is my project for the React course in SoftUni. It was created with React, T
     npm install
     npm start
  ```
- 
+
  <br/>
 
 # :earth_asia: Public
