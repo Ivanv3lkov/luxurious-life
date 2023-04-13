@@ -7,6 +7,7 @@ import './CarList.css';
 export type Car = {
   id: string;
   model: string;
+  year: number;
   description: string;
   image: string;
   creator: string;
@@ -42,6 +43,7 @@ const CarList: React.FC<Props> = ({ items, onDeleteCar }) => {
           id={car.id}
           image={car.image}
           model={car.model}
+          year={car.year}
           description={car.description}
           creatorId={car.creator}
           reactions={car.reactions}

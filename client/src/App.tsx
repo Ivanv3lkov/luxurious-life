@@ -11,7 +11,7 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 
 const Profile = React.lazy(() => import('./user/pages/Profile'));
 const UpdateProfile = React.lazy(() => import('./user/pages/UpdateProfile'));
-const AllLuxuryItems = React.lazy(() => import('./all-luxury-items/pages/AllLuxuryItems'));
+const AllLuxuryItems = React.lazy(() => import('./all-luxury-items/AllLuxuryItems'));
 const Users = React.lazy(() => import('./user/pages/Users'));
 const UserHomes = React.lazy(() => import('./homes/pages/UserHomes'));
 const UserCars = React.lazy(() => import('./cars/pages/UserCars'));

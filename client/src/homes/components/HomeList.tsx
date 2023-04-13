@@ -12,6 +12,11 @@ export type Home = {
   address: string;
   location: { lat: number; lng: number };
   creator: string;
+  reactions: {
+    likes: string[];
+    hearts: string[];
+    diamonds: string[];
+  };
 };
 
 type Props = {
@@ -44,6 +49,7 @@ const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
             address={home.address}
             creatorId={home.creator}
             coordinates={home.location}
+            reactions={home.reactions}
             onDelete={onDeleteHome}
           />
         ))}

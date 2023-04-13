@@ -19,6 +19,10 @@ type InitialCarFormInputs = {
     value: string;
     isValid: boolean;
   };
+  year: {
+    value: '',
+    isValid: false
+  },
   description: {
     value: string;
     isValid: boolean;
@@ -35,6 +39,10 @@ const NewCar = () => {
   const [formState, inputHandler] = useForm<InitialCarFormInputs, boolean>(
     {
       model: {
+        value: '',
+        isValid: false
+      },
+      year: {
         value: '',
         isValid: false
       },
@@ -80,6 +88,15 @@ const NewCar = () => {
           label="Model"
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid model."
+          onInput={inputHandler}
+        />
+        <Input
+          type="number"
+          id="year"
+          element="input"
+          label="Year"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter a car manufacture date."
           onInput={inputHandler}
         />
         <Input

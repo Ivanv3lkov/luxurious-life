@@ -27,6 +27,10 @@ const UpdateCar: React.FC = () => {
         value: '',
         isValid: false
       },
+      year: {
+        value: '',
+        isValid: false
+      },
       description: {
         value: '',
         isValid: false
@@ -38,11 +42,17 @@ const UpdateCar: React.FC = () => {
   useEffect(() => {
     const fetchCar = async () => {
       try {
-        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/cars/${carId}`);
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/cars/${carId}`
+        );
         setLoadedCar(responseData.car);
         setFormData(
           {
             model: {
+              value: responseData.car.model,
+              isValid: true
+            },
+            year: {
               value: responseData.car.model,
               isValid: true
             },
@@ -110,6 +120,15 @@ const UpdateCar: React.FC = () => {
             onInput={inputHandler}
             initialValue={loadedCar.model}
             initialValid={true}
+          />
+          <Input
+            id="year"
+            type="number"
+            element="input"
+            label="Year"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a car manufacture date."
+            onInput={inputHandler}
           />
           <Input
             id="description"

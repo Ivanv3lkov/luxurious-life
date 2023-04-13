@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { IoDiamondSharp } from 'react-icons/io5';
+import { FaThumbsUp } from 'react-icons/fa';
+import { FcLike, FcDislike } from 'react-icons/fc';
+import { GiDiamondHard } from 'react-icons/gi';
+
 import { StoreState } from '../../store';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import Card from '../../shared/components/UIElements/Card/Card';
@@ -8,16 +13,13 @@ import Button from '../../shared/components/FormElements/Button/Button';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
-import { IoDiamondSharp } from 'react-icons/io5';
-import { FaThumbsUp } from 'react-icons/fa';
-import { FcLike, FcDislike } from 'react-icons/fc';
-import { GiDiamondHard } from 'react-icons/gi';
 
 import './CarItem.css';
 
 export type Props = {
   id: string;
   model: string;
+  year: number;
   description: string;
   image: string;
   creatorId: string;
@@ -32,6 +34,7 @@ export type Props = {
 const CarItem: React.FC<Props> = ({
   id,
   model,
+  year,
   description,
   image,
   creatorId,
@@ -108,6 +111,7 @@ const CarItem: React.FC<Props> = ({
           </div>
           <div className="car-item__info">
             <h2>{model}</h2>
+            <h2>{year}</h2>
             <p>{description}</p>
             <div className="car-item__reactions">
               <h3>

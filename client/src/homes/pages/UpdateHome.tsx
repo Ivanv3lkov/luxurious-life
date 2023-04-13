@@ -30,6 +30,10 @@ const UpdateHome: React.FC = () => {
       description: {
         value: '',
         isValid: false
+      },
+      address: {
+        value: '',
+        isValid: false
       }
     },
     false
@@ -49,6 +53,10 @@ const UpdateHome: React.FC = () => {
             description: {
               value: responseData.home.description,
               isValid: true
+            },
+            address: {
+              value: responseData.home.address,
+              isValid: true
             }
           },
           true
@@ -66,7 +74,8 @@ const UpdateHome: React.FC = () => {
         'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,
-          description: formState.inputs.description.value
+          description: formState.inputs.description.value,
+          address: formState.inputs.address.value
         }),
         {
           'Content-Type': 'application/json',
@@ -119,6 +128,16 @@ const UpdateHome: React.FC = () => {
             errorText="Please enter a valid description (min. 5 characters)."
             onInput={inputHandler}
             initialValue={loadedHome.description}
+            initialValid={true}
+          />
+           <Input
+            id="address"
+            element="input"
+            label="Address"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid address."
+            onInput={inputHandler}
+            initialValue={loadedHome.address}
             initialValid={true}
           />
           <div className="home-form__buttons">
