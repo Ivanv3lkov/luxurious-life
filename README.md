@@ -36,15 +36,19 @@ The guest pages are:
 * Authentication - Login, Sign Up
 * All Users
 * All Luxury Items
+* Homes
+* Cars
 
 # :lock: Private
 
 The logged-in users are:
 
 * All Users
+* Different user's items /homes, cars/
+* My own cars and homes
 * All Luxury Items
-* My Homes
-* My Cars
+* Homes
+* Cars
 * Profile
 
 * **Functionality**
