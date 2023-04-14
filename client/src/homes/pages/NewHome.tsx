@@ -80,7 +80,7 @@ const NewHome: React.FC = () => {
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="home-form" onSubmit={homeSubmitHandler}>
+      <form className="home__form" onSubmit={homeSubmitHandler}>
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="title"

@@ -27,7 +27,7 @@ type Props = {
 const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {  
   if (items.length === 0) {
     return (
-      <div className="home-list">
+      <div className="home-list center">
         <Card>
           <h2>No homes found. Maybe create one?</h2>
           <Button to="/homes/new">Add new home</Button>
