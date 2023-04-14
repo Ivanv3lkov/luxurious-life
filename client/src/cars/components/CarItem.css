@@ -3,7 +3,7 @@
 }
 
 .car-item__content {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .car-item__info {

@@ -16,6 +16,8 @@ import {
   VALIDATOR_REQUIRE
 } from '../../shared/util/validators';
 
+import './Auth.css';
+
 export type InitialAuthFormInputs = {
   email: {
     value: string;

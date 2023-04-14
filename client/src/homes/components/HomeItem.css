@@ -3,7 +3,7 @@
 }
 
 .home-item__content {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .home-item__info {

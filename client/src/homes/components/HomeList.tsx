@@ -1,3 +1,7 @@
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { StoreState } from '../../store';
 import Card from '../../shared/components/UIElements/Card/Card';
 import HomeItem from './HomeItem';
 import Button from '../../shared/components/FormElements/Button/Button';
@@ -21,21 +25,31 @@ export type Home = {
 
 type Props = {
   items: Home[];
-  onDeleteHome: (deletedHomeId: string) => void;
+  onDeleteHome?: (deletedHomeId: string) => void;
 };
 
-const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {  
+const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
+  const urlParams = useParams<{ userId: string }>();
+  const { userId } = useSelector((state: StoreState) => state.user);
+
   if (items.length === 0) {
     return (
       <div className="home-list center">
-        <Card>
-          <h2>No homes found. Maybe create one?</h2>
-          <Button to="/homes/new">Add new home</Button>
-        </Card>
+        {urlParams.userId === userId ? (
+          <Card>
+            <h2>No homes found. Maybe create one?</h2>
+            <Button to="/homes/new">Add new home</Button>
+          </Card>
+        ) : (
+          <Card>
+            <h2>No homes found for this user</h2>
+            <Button to="/users">Go back</Button>
+          </Card>
+        )}
       </div>
     );
   }
-  
+
   return (
     <>
       <ul className="home-list">
@@ -50,7 +64,7 @@ const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
             creatorId={home.creator}
             coordinates={home.location}
             reactions={home.reactions}
-            onDelete={onDeleteHome}
+            onDelete={onDeleteHome ? onDeleteHome : () => console.log('delete')}
           />
         ))}
       </ul>

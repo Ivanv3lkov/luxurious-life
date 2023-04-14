@@ -11,7 +11,6 @@ type Props = {
   inverse?: boolean;
   danger?: boolean;
   to?: string;
-  golden?: boolean;
   exact?: any;
   disabled?: boolean;
   children?: ReactNode;
@@ -24,7 +23,6 @@ const Button: React.FC<Props> = ({
   size,
   inverse,
   danger,
-  golden,
   to,
   disabled,
   children
@@ -35,7 +33,6 @@ const Button: React.FC<Props> = ({
         className={`button button--${size || 'default'} 
           ${inverse && 'button--inverse'} 
           ${danger && 'button--danger'} 
-          ${golden && 'button--golden'}
         `}
         href={href}
       >
@@ -49,7 +46,7 @@ const Button: React.FC<Props> = ({
         to={to}
         className={`button button--${size || 'default'} ${inverse && 'button--inverse'} ${
           danger && 'button--danger'
-        } ${golden && 'button--golden'}`}
+        }`}
       >
         {children}
       </Link>
@@ -59,7 +56,7 @@ const Button: React.FC<Props> = ({
     <button
       className={`button button--${size || 'default'} ${inverse && 'button--inverse'} ${
         danger && 'button--danger'
-      } ${golden && 'button--golden'}`}
+      }`}
       type={type}
       onClick={onClick}
       disabled={disabled}
