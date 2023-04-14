@@ -20,7 +20,6 @@
 .car-item__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .car-item__info h2,

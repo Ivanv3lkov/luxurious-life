@@ -20,9 +20,9 @@ type InitialCarFormInputs = {
     isValid: boolean;
   };
   year: {
-    value: '',
-    isValid: false
-  },
+    value: '';
+    isValid: false;
+  };
   description: {
     value: string;
     isValid: boolean;
@@ -108,7 +108,12 @@ const NewCar = () => {
           errorText="Please enter a valid description (at least 5 characters)."
           onInput={inputHandler}
         />
-        <ImageUpload id="image" onInput={inputHandler} errorText="Please provide an image." />
+        <ImageUpload
+          id="image"
+          center
+          onInput={inputHandler}
+          errorText="Please provide an image."
+        />
         <Button type="submit" disabled={!formState.isValid}>
           ADD CAR
         </Button>

@@ -63,11 +63,12 @@ const ImageUpload: React.FC<Props> = (props) => {
           {previewUrl && <img src={previewUrl} alt="Preview" />}
           {!previewUrl && <p>Please pick an image.</p>}
         </div>
+        {!isValid && <p>{props.errorText}</p>}
         <Button type="button" onClick={pickImageHandler}>
           PICK IMAGE
         </Button>
       </div>
-      {!isValid && <p>{props.errorText}</p>}
+      
     </div>
   );
 };
