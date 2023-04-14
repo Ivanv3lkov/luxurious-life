@@ -95,9 +95,11 @@ const Profile = () => {
               </div>
             </header>
             <hr></hr>
-            <h3>First Name: {firstName}</h3>
-            <h3>Last Name: {lastName}</h3>
-            <h3>Email: {email}</h3>
+            <div className="profile-item__info">
+              <h3>First Name: {firstName}</h3>
+              <h3>Last Name: {lastName}</h3>
+              <h3>Email: {email}</h3>
+            </div>
             <hr></hr>
             <div className="profile-item__items-count">
               <h3>Shared homes: {homesCount}</h3>

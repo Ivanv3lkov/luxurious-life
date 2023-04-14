@@ -19,7 +19,7 @@
 
 .car-item__image img {
   width: 100%;
-  height: 100%;
+  object-fit: cover;
 }
 
 .car-item__info h2,
@@ -48,9 +48,9 @@
 }
 
 .car-item__actions span {
-  padding-left: 5px;
+  padding-left: 2px;
   vertical-align: top;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .car-item__actions svg {
