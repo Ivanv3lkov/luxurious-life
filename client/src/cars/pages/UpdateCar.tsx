@@ -76,6 +76,7 @@ const UpdateCar: React.FC = () => {
         'PATCH',
         JSON.stringify({
           model: formState.inputs.model.value,
+          year: formState.inputs.year.value,
           description: formState.inputs.description.value
         }),
         {
@@ -127,8 +128,10 @@ const UpdateCar: React.FC = () => {
             element="input"
             label="Year"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a car manufacture date."
+            errorText="Please enter a valid car manufacture date."
             onInput={inputHandler}
+            initialValue={loadedCar.year}
+            initialValid={true}
           />
           <Input
             id="description"

@@ -65,6 +65,7 @@ const NewCar = () => {
     try {
       const formData = new FormData();
       formData.append('model', formState.inputs.model.value);
+      formData.append('year', formState.inputs.year.value);
       formData.append('description', formState.inputs.description.value);
       formData.append('image', formState.inputs.image.value);
       await sendRequest(process.env.REACT_APP_BACKEND_URL + '/cars', 'POST', formData, {
@@ -96,7 +97,7 @@ const NewCar = () => {
           element="input"
           label="Year"
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a car manufacture date."
+          errorText="Please enter a valid car manufacture date."
           onInput={inputHandler}
         />
         <Input

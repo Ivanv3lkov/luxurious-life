@@ -35,7 +35,7 @@ The guest pages are:
 
 * Authentication - Login, Sign Up
 * All Users
-* All Luxury Items
+* All Luxuries
 * All Homes
 * All Cars
 

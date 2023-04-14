@@ -11,7 +11,7 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 
 const Profile = React.lazy(() => import('./user/pages/Profile'));
 const UpdateProfile = React.lazy(() => import('./user/pages/UpdateProfile'));
-const AllLuxuryItems = React.lazy(() => import('./all-luxury-items/AllLuxuryItems'));
+const AllLuxuries = React.lazy(() => import('./all-luxuries/AllLuxuries'));
 const Users = React.lazy(() => import('./user/pages/Users'));
 const UserHomes = React.lazy(() => import('./homes/pages/UserHomes'));
 const UserCars = React.lazy(() => import('./cars/pages/UserCars'));
@@ -37,11 +37,11 @@ const App = () => {
   if (isLoggedIn) {
     routes = (
       <Switch>
+        <Route path="/" exact>
+          <AllLuxuries />
+        </Route>
         <Route path="/users" exact>
           <Users />
-        </Route>
-        <Route path="/items" exact>
-          <AllLuxuryItems />
         </Route>
         <Route path="/homes" exact>
           <AllHomes />
@@ -76,17 +76,17 @@ const App = () => {
         <Route path="/:userId/profile/edit" exact>
           <UpdateProfile />
         </Route>
-        <Redirect to="/users" />
+        <Redirect to="/" />
       </Switch>
     );
   } else {
     routes = (
       <Switch>
+        <Route path="/" exact>
+          <AllLuxuries />
+        </Route>
         <Route path="/users" exact>
           <Users />
-        </Route>
-        <Route path="/items" exact>
-          <AllLuxuryItems />
         </Route>
         <Route path="/homes" exact>
           <AllHomes />

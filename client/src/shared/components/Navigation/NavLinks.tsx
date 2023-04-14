@@ -17,16 +17,16 @@ const NavLinks: React.FC = () => {
   const { isLoggedIn, userId } = useSelector((state: StoreState) => state.user);
   return (
     <ul className="nav-links">
-        <li>
+      <li>
+        <NavLink to="/" exact className="nav-links__li">
+          <IoDiamondOutline />
+          <span>All Luxuries</span>
+        </NavLink>
+      </li>
+      <li>
         <NavLink to="/users" exact className="nav-links__li">
           <IoIosPeople />
           <span>All Users</span>
-        </NavLink>
-      </li>
-         <li>
-        <NavLink to="/items" exact className="nav-links__li">
-          <IoDiamondOutline />
-          <span>All Luxury Items</span>
         </NavLink>
       </li>
       {isLoggedIn && (

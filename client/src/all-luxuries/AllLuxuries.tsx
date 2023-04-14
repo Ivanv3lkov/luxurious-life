@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { MdHomeWork } from 'react-icons/md';
 import { IoCarSportSharp } from 'react-icons/io5';
 
-import './AllLuxuryItems.css';
+import './AllLuxuries.css';
 
 const AllLuxuryItems: React.FC = () => {
   return (
