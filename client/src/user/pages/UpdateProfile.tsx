@@ -96,7 +96,7 @@ const UpdateProfile: React.FC = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && userId && (
-        <form className="profile-form" onSubmit={profileUpdateSubmitHandler}>
+        <form className="profile__form" onSubmit={profileUpdateSubmitHandler}>
           <Input
             id="firstName"
             element="input"
@@ -118,7 +118,7 @@ const UpdateProfile: React.FC = () => {
             initialValue={lastName || ''}
             initialValid={true}
           />
-          <div className="profile-form__buttons">
+          <div className="profile__form-buttons">
             <Button type="submit" disabled={!formState.isValid}>
               UPDATE PROFILE
             </Button>

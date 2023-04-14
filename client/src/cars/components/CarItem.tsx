@@ -89,7 +89,6 @@ const CarItem: React.FC<Props> = ({
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="car-item__modal-actions"
         footer={
           <>
             <Button inverse onClick={cancelDeleteHandler}>

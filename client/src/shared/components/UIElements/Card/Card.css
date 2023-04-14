@@ -5,3 +5,31 @@
   overflow: hidden;
   background: white;
 }
+
+.card.authentication {
+  padding: 2rem;
+  max-width: 26rem;
+  margin: 5rem auto;
+  text-align: center;
+}
+
+.card.authentication__header {
+  color: white;
+  text-align: center;
+}
+
+.card.authentication form {
+  margin-bottom: 1rem;
+}
+
+.card.profile {
+  list-style: none;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 40rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+  background-color: #0e2f44 !important;
+  color: white;
+}

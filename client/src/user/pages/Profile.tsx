@@ -61,7 +61,6 @@ const Profile = () => {
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="profile-item__modal-actions"
         footer={
           <>
             <Button inverse onClick={cancelDeleteHandler}>
@@ -84,36 +83,34 @@ const Profile = () => {
         </div>
       )}
       {!isLoading && email && (
-        <div className="profile-item__content">
-          <Card className="profile-item__card">
+          <Card className="profile">
             <header>
               <h1>
                 <strong>Profile</strong>
               </h1>
-              <div className="profile-item__image">
+              <div className="profile__image">
                 <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt={'image'} />
               </div>
             </header>
             <hr></hr>
-            <div className="profile-item__info">
+            <div className="profile__info">
               <h3>First Name: {firstName}</h3>
               <h3>Last Name: {lastName}</h3>
               <h3>Email: {email}</h3>
             </div>
             <hr></hr>
-            <div className="profile-item__items-count">
+            <div className="profile__items-count">
               <h3>Shared homes: {homesCount}</h3>
               <h3>Shared cars: {carsCount}</h3>
             </div>
             <hr></hr>
-            <div className="profile-item__actions">
+            <div className="profile__actions">
               <Button to={`/${userId}/profile/edit`}>EDIT</Button>
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
             </div>
           </Card>
-        </div>
       )}
     </>
   );

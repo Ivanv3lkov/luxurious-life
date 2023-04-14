@@ -108,7 +108,7 @@ const UpdateHome: React.FC = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedHome && (
-        <form className="home-form" onSubmit={homeUpdateSubmitHandler}>
+        <form className="home__form" onSubmit={homeUpdateSubmitHandler}>
           <Input
             id="title"
             element="input"
