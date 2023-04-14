@@ -13,7 +13,7 @@
 }
 
 main {
-  margin-top: 5rem;
+  margin: 5rem auto;
 }
 
 @media (min-width: 768px) {
