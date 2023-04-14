@@ -5,7 +5,7 @@
 
 .authentication {
   max-width: 25rem;
-  margin: 7rem auto;
+  margin: 7rem auto !important;
   text-align: center;
 }
 
