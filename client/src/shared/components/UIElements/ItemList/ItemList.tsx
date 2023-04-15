@@ -46,6 +46,7 @@ const ItemList: React.FC<Props> = ({ items, collectionName }) => {
           key={item.id}
           id={item.id}
           image={item.image}
+          
           title={item.title}
           model={item.model}
           reactions={item.reactions}

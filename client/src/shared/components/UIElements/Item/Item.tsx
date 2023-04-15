@@ -34,7 +34,7 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
   const isHomeLiked = userId ? likes.includes(userId) : false;
   const isHomeLoved = userId ? hearts.includes(userId) : false;
   const isHomePriceless = userId ? diamonds.includes(userId) : false;
-  
+
   const reactToHomeHandler = async (buttonText: string) => {
     console.log(collectionName);
 
@@ -67,18 +67,18 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
         <div className="item__info">
           <h2>{title ? title : model}</h2>
           <div className="item__reactions">
-            <h3>
-              <FaThumbsUp size={22} />
+            <p>
+              <FaThumbsUp size={30} />
               {likes.length}
-            </h3>
-            <h3>
-              <FcLike size={22} />
+            </p>
+            <p>
+              <FcLike size={33} />
               {hearts.length}
-            </h3>
-            <h3>
-              <IoDiamondSharp size={21} />
+            </p>
+            <p>
+              <IoDiamondSharp size={28} />
               {diamonds.length}
-            </h3>
+            </p>
           </div>
         </div>
         <div className="item__actions">

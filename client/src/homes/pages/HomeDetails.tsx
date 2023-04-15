@@ -80,7 +80,7 @@ const HomeDetails: React.FC = () => {
       </div>
     );
   }
-
+  
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
@@ -88,11 +88,11 @@ const HomeDetails: React.FC = () => {
         show={showMap}
         onCancel={closeMapHandler}
         header={loadedHome.address}
-        contentClass="home-item__modal-content"
-        footerClass="home-item__modal-actions"
+        contentClass="item__modal-content"
+        footerClass="item__modal-actions"
         footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
       >
-        <div className="map-container">
+        <div className="item__map-container">
           <Map center={loadedHome?.location || { lat: 30, lng: 60 }} zoom={16} />
         </div>
       </Modal>
@@ -115,35 +115,37 @@ const HomeDetails: React.FC = () => {
       </Modal>
       {isLoading && <LoadingSpinner asOverlay />}
       {!isLoading && loadedHome.title && (
-        <Card className="details">
-          <div className="details__content">
-            <div className="details__image">
-              <img src={`${process.env.REACT_APP_ASSET_URL}/${loadedHome.image}`} alt="img" />
-            </div>
-            <h2>{loadedHome.title}</h2>
-            <p>Address: {loadedHome.address}</p>
-            <p>Description: {loadedHome.description}</p>
-            <div className="details__reactions">
-              <FaThumbsUp size={22} />
+        <Card className="item__details">
+          <img src={`${process.env.REACT_APP_ASSET_URL}/${loadedHome.image}`} alt="img" />
+          <h2>{loadedHome.title}</h2>
+          <p>Address: {loadedHome.address}</p>
+          <p>Description: {loadedHome.description}</p>
+          <div className="item__reactions">
+            <p>
+              <FaThumbsUp size={30} />
               {loadedHome.reactions.likes.length}
-              <FcLike size={22} />
+            </p>
+            <p>
+              <FcLike size={33} />
               {loadedHome.reactions.hearts.length}
-              <IoDiamondSharp size={21} />
+            </p>
+            <p>
+              <IoDiamondSharp size={28} />
               {loadedHome.reactions.diamonds.length}
-            </div>
-            <div className="details__actions">
-              {userId === loadedHome.creator && (
-                <>
-                  <Button onClick={openMapHandler} disabled={!userId} inverse>
-                    VIEW ON MAP
-                  </Button>
-                  <Button to={`/homes/${loadedHome.id}/edit`}>EDIT</Button>
-                  <Button danger onClick={showDeleteWarningHandler}>
-                    DELETE
-                  </Button>
-                </>
-              )}
-            </div>
+            </p>
+          </div>
+          <div className="item__actions">
+            {userId === loadedHome.creator && (
+              <>
+                <Button onClick={openMapHandler} disabled={!userId} inverse>
+                  VIEW ON MAP
+                </Button>
+                <Button to={`/homes/${loadedHome.id}/edit`}>EDIT</Button>
+                <Button danger onClick={showDeleteWarningHandler}>
+                  DELETE
+                </Button>
+              </>
+            )}
           </div>
         </Card>
       )}

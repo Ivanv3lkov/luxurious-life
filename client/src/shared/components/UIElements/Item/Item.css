@@ -1,6 +1,7 @@
 .item {
-  border: 1px solid #ccc;
-  background-color: white;
+  box-shadow: 0 0 100px black;
+  padding: 0 !important;
+  background-color: whitesmoke;
   padding-bottom: 10px;
   margin-bottom: 2rem;
 }
@@ -21,16 +22,17 @@
 }
 
 .item__reactions {
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
-.item__reactions h3 {
+.item__reactions p {
+  margin: 0;
   display: inline;
-  padding-left: 10px;
+  font-size: 20px;
 }
 
 .item__reactions svg {
-  padding-right: 5px;
+  padding: 0 7.5px;
 }
 
 .item__actions {
