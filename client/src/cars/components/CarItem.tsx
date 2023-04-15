@@ -27,13 +27,7 @@ export type Props = {
   };
 };
 
-const CarItem: React.FC<Props> = ({
-  id,
-  model,
-  image,
-  creatorId,
-  reactions,
-}) => {
+const CarItem: React.FC<Props> = ({ id, model, image, creatorId, reactions }) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
   const [{ likes, hearts, diamonds }, setCarReactions] = useState(reactions);
@@ -109,7 +103,7 @@ const CarItem: React.FC<Props> = ({
                 {isCarPriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
                 {isCarPriceless ? 'Worthless' : 'Priceless'}
               </Button>
-              {userId === creatorId && <Button to={`/cars/${id}/details`}>DETAILS</Button>}
+              <Button to={`/cars/${id}/details`}>DETAILS</Button>
             </div>
           </div>
         </Card>
