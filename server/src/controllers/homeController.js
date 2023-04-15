@@ -9,18 +9,18 @@ const HttpError = require('../utils/httpErrorHelper');
 
 exports.getAllHomes = async (req, res, next) => {
   let homes;
+  
   try {
     homes = await Home.find();
   } catch (err) {
     const error = new HttpError('Something went wrong, could not find any homes.', 500);
     return next(error);
   }
-
-  if (!homes) {
+  
+  if (!homes || homes.length === 0) {
     const error = new HttpError('Could not find any homes.', 404);
     return next(error);
   }
-
   res.json({ homes: homes.map(home => home.toObject({ getters: true })) });
 };
 
