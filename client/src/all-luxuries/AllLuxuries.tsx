@@ -6,7 +6,7 @@ import './AllLuxuries.css';
 
 const AllLuxuryItems: React.FC = () => {
   return (
-    <div className="item__links">
+    <div className="item__links center">
       <div className="item__link">
         <Link to={`/homes`}>
           <MdHomeWork color="#0e2f44" size="22rem"/>

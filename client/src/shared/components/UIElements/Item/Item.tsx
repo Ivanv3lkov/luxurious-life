@@ -60,54 +60,54 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
     <>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
-      <div className="item">
-        <div className="item__image">
-          <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
-        </div>
-        <div className="item__info">
-          <h2>{title ? title : model}</h2>
-          <div className="item__reactions">
-            <p>
-              <FaThumbsUp size={30} />
-              {likes.length}
-            </p>
-            <p>
-              <FcLike size={33} />
-              {hearts.length}
-            </p>
-            <p>
-              <IoDiamondSharp size={28} />
-              {diamonds.length}
-            </p>
+        <div className="item">
+          <div className="item__image">
+            <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
+          </div>
+          <div className="item__info">
+            <h2>{title ? title : model}</h2>
+            <div className="item__reactions">
+              <p>
+                <FaThumbsUp size={30} />
+                {likes.length}
+              </p>
+              <p>
+                <FcLike size={33} />
+                {hearts.length}
+              </p>
+              <p>
+                <IoDiamondSharp size={28} />
+                {diamonds.length}
+              </p>
+            </div>
+          </div>
+          <div className="item__actions">
+            <div>
+              <Button
+                onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
+                disabled={!userId}
+              >
+                <FaThumbsUp size={15} transform={isHomeLiked ? 'scale(1 -1)' : ''} />
+                {isHomeLiked ? 'Unlike' : 'Like'}
+              </Button>
+              <Button
+                onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
+                disabled={!userId}
+              >
+                {isHomeLoved ? <FcDislike size={15} /> : <FcLike size={15} />}
+                {isHomeLoved ? 'Unlove' : 'Love'}
+              </Button>
+              <Button
+                onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
+                disabled={!userId}
+              >
+                {isHomePriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
+                {isHomePriceless ? 'Worthless' : 'Priceless'}
+              </Button>
+              <Button to={`/${collectionName}/${id}/details`}>DETAILS</Button>
+            </div>
           </div>
         </div>
-        <div className="item__actions">
-          <div>
-            <Button
-              onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
-              disabled={!userId}
-            >
-              <FaThumbsUp size={15} transform={isHomeLiked ? 'scale(1 -1)' : ''} />
-              {isHomeLiked ? 'Unlike' : 'Like'}
-            </Button>
-            <Button
-              onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
-              disabled={!userId}
-            >
-              {isHomeLoved ? <FcDislike size={15} /> : <FcLike size={15} />}
-              {isHomeLoved ? 'Unlove' : 'Love'}
-            </Button>
-            <Button
-              onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
-              disabled={!userId}
-            >
-              {isHomePriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
-              {isHomePriceless ? 'Worthless' : 'Priceless'}
-            </Button>
-            <Button to={`/${collectionName}/${id}/details`}>DETAILS</Button>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

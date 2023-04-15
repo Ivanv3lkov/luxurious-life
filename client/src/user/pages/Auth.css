@@ -12,3 +12,7 @@
 .authentication form {
  margin: 1rem auto;
 }
+
+.authentication button {
+  margin-right: 0
+}
