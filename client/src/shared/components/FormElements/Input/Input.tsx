@@ -98,6 +98,7 @@ const Input: React.FC<Props> = (props) => {
     ) : (
       <textarea
         id={props.id}
+        maxLength={50}
         rows={3}
         onChange={changeHandler}
         onBlur={touchHandler}

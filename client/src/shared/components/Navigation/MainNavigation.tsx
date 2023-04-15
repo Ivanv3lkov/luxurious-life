@@ -35,7 +35,7 @@ const MainNavigation: React.FC = () => {
           <span />
         </button>
         <h2 className="main-navigation__title">
-          <Link to="/">Luxurious Life</Link>
+          <Link to="/users">Luxurious Life</Link>
         </h2>
         <nav className="main-navigation__header-nav">
           <NavLinks />

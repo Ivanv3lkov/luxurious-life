@@ -35,17 +35,19 @@ const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
   if (items.length === 0) {
     return (
       <div className="home-list center">
-        {urlParams.userId === userId ? (
-          <Card>
-            <h2>No homes found. Maybe create one?</h2>
-            <Button to="/homes/new">Add new home</Button>
-          </Card>
-        ) : (
-          <Card>
-            <h2>No homes found for this user</h2>
-            <Button to="/users">Go back</Button>
-          </Card>
-        )}
+        <Card>
+          {urlParams.userId === userId ? (
+            <>
+              <h2>No homes found. Maybe create one?</h2>
+              <Button to="/homes/new">Add new home</Button>
+            </>
+          ) : (
+            <>
+              <h2>No homes found for this user</h2>
+              <Button to="/users">Go back</Button>
+            </>
+          )}
+        </Card>
       </div>
     );
   }
@@ -59,12 +61,8 @@ const HomeList: React.FC<Props> = ({ items, onDeleteHome }) => {
             id={home.id}
             image={home.image}
             title={home.title}
-            description={home.description}
-            address={home.address}
             creatorId={home.creator}
-            coordinates={home.location}
             reactions={home.reactions}
-            onDelete={onDeleteHome ? onDeleteHome : () => console.log('delete')}
           />
         ))}
       </ul>

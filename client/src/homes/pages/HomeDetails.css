@@ -1,0 +1,28 @@
+.details {
+  margin: 0 auto;
+  width: 600px;
+}
+
+.details__content {
+  text-align: center;
+}
+
+.details__reactions {
+  padding-top: 10px;
+  padding-bottom: 2rem;
+}
+
+.details__reactions svg {
+  padding: 5px;
+}
+
+.details__image {
+  width: 600px;
+  border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  .details__image {
+  margin: 0 auto;
+  } 
+}

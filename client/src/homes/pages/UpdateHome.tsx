@@ -15,12 +15,12 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal
 import './HomeForm.css';
 
 const UpdateHome: React.FC = () => {
-  const { accessToken, userId } = useSelector((state: StoreState) => state.user);
+  const { accessToken } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedHome, setLoadedHome] = useState<any>();
   const { homeId } = useParams<{ homeId: string }>();
   const history = useHistory();
-
+  
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
@@ -82,7 +82,7 @@ const UpdateHome: React.FC = () => {
           Authorization: 'Bearer ' + accessToken
         }
       );
-      history.push('/' + userId + '/homes');
+      history.push(`/homes/${homeId}/details`);
     } catch (err) {}
   };
 
@@ -144,7 +144,7 @@ const UpdateHome: React.FC = () => {
             <Button type="submit" disabled={!formState.isValid}>
               UPDATE HOME
             </Button>
-            <Button to={`/${userId}/homes`}>CANCEL</Button>
+            <Button to={`/homes/${homeId}/details`}>CANCEL</Button>
           </div>
         </form>
       )}

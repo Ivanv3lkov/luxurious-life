@@ -10,7 +10,6 @@ import { StoreState } from '../../store';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import Card from '../../shared/components/UIElements/Card/Card';
 import Button from '../../shared/components/FormElements/Button/Button';
-import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
@@ -19,8 +18,6 @@ import './CarItem.css';
 export type Props = {
   id: string;
   model: string;
-  year: number;
-  description: string;
   image: string;
   creatorId: string;
   reactions: {
@@ -28,40 +25,21 @@ export type Props = {
     hearts: string[];
     diamonds: string[];
   };
-  onDelete: (carId: string) => void;
 };
 
 const CarItem: React.FC<Props> = ({
   id,
   model,
-  year,
-  description,
   image,
   creatorId,
   reactions,
-  onDelete
 }) => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
-  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [{ likes, hearts, diamonds }, setCarReactions] = useState(reactions);
   const isCarLiked = userId ? likes.includes(userId) : false;
   const isCarLoved = userId ? hearts.includes(userId) : false;
   const isCarPriceless = userId ? diamonds.includes(userId) : false;
-
-  const showDeleteWarningHandler = () => setShowConfirmModal(true);
-
-  const cancelDeleteHandler = () => setShowConfirmModal(false);
-
-  const confirmDeleteHandler = async () => {
-    setShowConfirmModal(false);
-    try {
-      await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/cars/${id}`, 'DELETE', null, {
-        Authorization: 'Bearer ' + accessToken
-      });
-      onDelete(id);
-    } catch (err) {}
-  };
 
   const reactToCarHandler = async (buttonText: string) => {
     try {
@@ -85,23 +63,6 @@ const CarItem: React.FC<Props> = ({
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      <Modal
-        show={showConfirmModal}
-        onCancel={cancelDeleteHandler}
-        header="Are you sure?"
-        footer={
-          <>
-            <Button inverse onClick={cancelDeleteHandler}>
-              CANCEL
-            </Button>
-            <Button danger onClick={confirmDeleteHandler}>
-              DELETE
-            </Button>
-          </>
-        }
-      >
-        <p>Do you want to proceed and delete this car?</p>
-      </Modal>
       <li className="car-item">
         <Card className="car-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
@@ -110,8 +71,6 @@ const CarItem: React.FC<Props> = ({
           </div>
           <div className="car-item__info">
             <h2>{model}</h2>
-            <h2>{year}</h2>
-            <p>{description}</p>
             <div className="car-item__reactions">
               <h3>
                 <FaThumbsUp size={22} />
@@ -150,15 +109,8 @@ const CarItem: React.FC<Props> = ({
                 {isCarPriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
                 {isCarPriceless ? 'Worthless' : 'Priceless'}
               </Button>
+              {userId === creatorId && <Button to={`/cars/${id}/details`}>DETAILS</Button>}
             </div>
-            {userId === creatorId && (
-              <>
-                <Button to={`/cars/${id}`}>EDIT</Button>
-                <Button danger onClick={showDeleteWarningHandler}>
-                  DELETE
-                </Button>
-              </>
-            )}
           </div>
         </Card>
       </li>

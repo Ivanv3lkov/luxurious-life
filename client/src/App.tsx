@@ -8,6 +8,7 @@ import { logout } from './store/user/userActions';
 import AuthVerify from './shared/hooks/useAuthVerify';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
+import CarDetails from './cars/pages/CarDetails';
 
 const Profile = React.lazy(() => import('./user/pages/Profile'));
 const UpdateProfile = React.lazy(() => import('./user/pages/UpdateProfile'));
@@ -17,6 +18,7 @@ const UserHomes = React.lazy(() => import('./homes/pages/UserHomes'));
 const UserCars = React.lazy(() => import('./cars/pages/UserCars'));
 const AllHomes = React.lazy(() => import('./homes/pages/AllHomes'));
 const NewHome = React.lazy(() => import('./homes/pages/NewHome'));
+const HomeDetails = React.lazy(() => import('./homes/pages/HomeDetails'));
 const UpdateHome = React.lazy(() => import('./homes/pages/UpdateHome'));
 const AllCars = React.lazy(() => import('./cars/pages/AllCars'));
 const NewCar = React.lazy(() => import('./cars/pages/NewCar'));
@@ -37,11 +39,11 @@ const App = () => {
   if (isLoggedIn) {
     routes = (
       <Switch>
-        <Route path="/" exact>
-          <AllLuxuries />
-        </Route>
         <Route path="/users" exact>
           <Users />
+        </Route>
+        <Route path="/all-luxuries" exact>
+          <AllLuxuries />
         </Route>
         <Route path="/homes" exact>
           <AllHomes />
@@ -52,7 +54,10 @@ const App = () => {
         <Route path="/homes/new" exact>
           <NewHome />
         </Route>
-        <Route path="/homes/:homeId">
+        <Route path="/homes/:homeId/details" exact>
+          <HomeDetails />
+        </Route>
+        <Route path="/homes/:homeId/edit" exact>
           <UpdateHome />
         </Route>
         <Route path="/cars" exact>
@@ -64,7 +69,10 @@ const App = () => {
         <Route path="/cars/new" exact>
           <NewCar />
         </Route>
-        <Route path="/cars/:carId">
+        <Route path="/cars/:carId/details" exact>
+          <CarDetails />
+        </Route>
+        <Route path="/cars/:carId/edit">
           <UpdateCar />
         </Route>
         <Route path="/:userId/items" exact>
@@ -76,23 +84,29 @@ const App = () => {
         <Route path="/:userId/profile/edit" exact>
           <UpdateProfile />
         </Route>
-        <Redirect to="/" />
+        <Redirect to="/users" />
       </Switch>
     );
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact>
-          <AllLuxuries />
-        </Route>
         <Route path="/users" exact>
           <Users />
+        </Route>
+        <Route path="/all-luxuries" exact>
+          <AllLuxuries />
         </Route>
         <Route path="/homes" exact>
           <AllHomes />
         </Route>
+        <Route path="/homes/:homeId/details" exact>
+          <HomeDetails />
+        </Route>
         <Route path="/cars" exact>
           <AllCars />
+        </Route>
+        <Route path="/cars/:carId/details" exact>
+          <CarDetails />
         </Route>
         <Route path="/auth">
           <Auth />

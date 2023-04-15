@@ -15,7 +15,7 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal
 import './CarForm.css';
 
 const UpdateCar: React.FC = () => {
-  const { accessToken, userId } = useSelector((state: StoreState) => state.user);
+  const { accessToken } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedCar, setLoadedCar] = useState<any>();
   const { carId } = useParams<{ carId: string }>();
@@ -84,7 +84,7 @@ const UpdateCar: React.FC = () => {
           Authorization: 'Bearer ' + accessToken
         }
       );
-      history.push('/' + userId + '/cars');
+      history.push(`/cars/${carId}/details`);
     } catch (err) {}
   };
 
@@ -147,7 +147,7 @@ const UpdateCar: React.FC = () => {
             <Button type="submit" disabled={!formState.isValid}>
               UPDATE CAR
             </Button>
-            <Button to={`/${userId}/cars`}>CANCEL</Button>
+            <Button to={`/cars/${carId}/details`}>CANCEL</Button>
           </div>
         </form>
       )}

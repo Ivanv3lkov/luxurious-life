@@ -18,15 +18,15 @@ const NavLinks: React.FC = () => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/" exact className="nav-links__li">
-          <IoDiamondOutline />
-          <span>All Luxuries</span>
-        </NavLink>
-      </li>
-      <li>
         <NavLink to="/users" exact className="nav-links__li">
           <IoIosPeople />
           <span>All Users</span>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/all-luxuries" exact className="nav-links__li">
+          <IoDiamondOutline />
+          <span>All Luxuries</span>
         </NavLink>
       </li>
       {isLoggedIn && (
