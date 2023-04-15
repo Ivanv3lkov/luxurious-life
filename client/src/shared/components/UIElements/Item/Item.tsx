@@ -6,32 +6,34 @@ import { FaThumbsUp } from 'react-icons/fa';
 import { IoDiamondSharp } from 'react-icons/io5';
 import { GiDiamondHard } from 'react-icons/gi';
 
-import { StoreState } from '../../store';
-import { useHttpClient } from '../../shared/hooks/useHttpClient';
-import Card from '../../shared/components/UIElements/Card/Card';
-import Button from '../../shared/components/FormElements/Button/Button';
-import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
+import { StoreState } from '../../../../store';
+import { useHttpClient } from '../../../../shared/hooks/useHttpClient';
+import Button from '../../FormElements/Button/Button';
+import ErrorModal from '../ErrorModal/ErrorModal';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
-import './HomeItem.css';
+import './Item.css';
 
 export type Props = {
   id: string;
-  title: string;
+  title?: string;
+  model?: string;
   image: string;
-  creatorId: string;
   reactions: {
     likes: string[];
     hearts: string[];
     diamonds: string[];
   };
+  collectionName: string
 };
 
-const HomeItem: React.FC<Props> = ({
+const Item: React.FC<Props> = ({
   id,
   title,
+  model,
   image,
   reactions,
+  collectionName
 }) => {
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -43,7 +45,7 @@ const HomeItem: React.FC<Props> = ({
   const reactToHomeHandler = async (buttonText: string) => {
     try {
       const responseData = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/homes/${id}/reactions`,
+        `${process.env.REACT_APP_BACKEND_URL}/${collectionName}/${id}/reactions`,
         'PATCH',
         JSON.stringify({
           homeId: id,
@@ -62,15 +64,14 @@ const HomeItem: React.FC<Props> = ({
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      <li className="home-item">
-        <Card className="home-item__content">
-          {isLoading && <LoadingSpinner asOverlay />}
-          <div className="home-item__image">
+      {isLoading && <LoadingSpinner asOverlay />}
+      <div className="item">
+          <div className="item__image">
             <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
-          <div className="home-item__info">
-            <h2>{title}</h2>
-            <div className="home-item__reactions">
+          <div className="item__info">
+            <h2>{title ? title : model}</h2>
+            <div className="item__reactions">
               <h3>
                 <FaThumbsUp size={22} />
                 {likes.length}
@@ -85,7 +86,7 @@ const HomeItem: React.FC<Props> = ({
               </h3>
             </div>
           </div>
-          <div className="home-item__actions">
+          <div className="item__actions">
             <div>
               <Button
                 onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
@@ -108,13 +109,12 @@ const HomeItem: React.FC<Props> = ({
                 {isHomePriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
                 {isHomePriceless ? 'Worthless' : 'Priceless'}
               </Button>
-              <Button to={`/homes/${id}/details`}>DETAILS</Button>
+              <Button to={`/${collectionName}/${id}/details`}>DETAILS</Button>
             </div>
           </div>
-        </Card>
-      </li>
+      </div>
     </>
   );
 };
 
-export default HomeItem;
+export default Item;

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CarList, { Car } from '../components/CarList';
+import ItemList from '../../shared/components/UIElements/ItemList/ItemList';
+import { Car } from './AllCars';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
@@ -25,10 +26,6 @@ const UserCars: React.FC = () => {
     fetchCars();
   }, [sendRequest, userId]);
 
-  const carDeletedHandler = (deletedCarId: string) => {
-    setLoadedCars((prevCars) => prevCars.filter((car) => car.id !== deletedCarId));
-  };
-
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
@@ -46,7 +43,7 @@ const UserCars: React.FC = () => {
               </Button>
             </div>
           )}
-          <CarList items={loadedCars} onDeleteCar={carDeletedHandler} />
+          <ItemList items={loadedCars} collectionName='cars' />
         </>
       )}
     </>

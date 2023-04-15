@@ -7,6 +7,7 @@ import { FaThumbsUp } from 'react-icons/fa';
 import { IoDiamondSharp } from 'react-icons/io5';
 
 import { StoreState } from '../../store';
+import { Car } from './AllCars';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import Card from '../../shared/components/UIElements/Card/Card';
 import Button from '../../shared/components/FormElements/Button/Button';
@@ -14,9 +15,8 @@ import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
-import { Car } from '../components/CarList';
-
 import './CarDetails.css';
+
 
 const CarDetails: React.FC = () => {
   const history = useHistory();
@@ -77,9 +77,10 @@ const CarDetails: React.FC = () => {
       >
         <p>Do you want to proceed and delete this car?</p>
       </Modal>
-      <Card className="details">
-        {isLoading && <LoadingSpinner asOverlay />}
-        {!isLoading && loadedCar && (
+
+      {isLoading && <LoadingSpinner asOverlay />}
+      {!isLoading && loadedCar && (
+        <Card className="details">
           <div className="details__content">
             <img
               className="details__image"
@@ -108,8 +109,8 @@ const CarDetails: React.FC = () => {
               )}
             </div>
           </div>
-        )}
-      </Card>
+        </Card>
+      )}
     </>
   );
 };

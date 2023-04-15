@@ -1,11 +1,25 @@
 import { useEffect, useState } from 'react';
 
-import CarList, { Car } from '../../cars/components/CarList';
+import ItemList from '../../shared/components/UIElements/ItemList/ItemList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
 
 import './UserCars.css';
+
+export type Car = {
+  id: string;
+  model: string;
+  year: number;
+  description: string;
+  image: string;
+  creator: string;
+  reactions: {
+    likes: string[];
+    hearts: string[];
+    diamonds: string[];
+  };
+};
 
 const AllCars: React.FC = () => {
   const [loadedCars, setLoadedCars] = useState<Car[]>([]);
@@ -22,10 +36,6 @@ const AllCars: React.FC = () => {
     fetchCars();
   }, [sendRequest]);
 
-  const carDeletedHandler = (deletedCarId: string) => {
-    setLoadedCars((prevCars) => prevCars.filter((car) => car.id !== deletedCarId));
-  };
-
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
@@ -34,7 +44,7 @@ const AllCars: React.FC = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedCars && <CarList items={loadedCars} onDeleteCar={carDeletedHandler} />}
+      {!isLoading && loadedCars && <ItemList items={loadedCars} collectionName='cars'/>}
     </>
   );
 };

@@ -113,16 +113,13 @@ const HomeDetails: React.FC = () => {
       >
         <p>Do you want to proceed and delete this home?</p>
       </Modal>
-      <Card className="details">
-        {isLoading && <LoadingSpinner asOverlay />}
-        {!isLoading && loadedHome.title && (
-          
+      {isLoading && <LoadingSpinner asOverlay />}
+      {!isLoading && loadedHome.title && (
+        <Card className="details">
           <div className="details__content">
-            <img
-              className="details__image"
-              src={`${process.env.REACT_APP_ASSET_URL}/${loadedHome.image}`}
-              alt="img"
-            />
+            <div className="details__image">
+              <img src={`${process.env.REACT_APP_ASSET_URL}/${loadedHome.image}`} alt="img" />
+            </div>
             <h2>{loadedHome.title}</h2>
             <p>Address: {loadedHome.address}</p>
             <p>Description: {loadedHome.description}</p>
@@ -148,8 +145,8 @@ const HomeDetails: React.FC = () => {
               )}
             </div>
           </div>
-        )}
-      </Card>
+        </Card>
+      )}
     </>
   );
 };

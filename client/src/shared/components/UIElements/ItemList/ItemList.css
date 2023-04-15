@@ -1,16 +1,16 @@
-.home-list {
+.item-list {
   list-style: none;
   margin: 1rem auto;
   padding: 0;
   max-width: 40rem;
 }
 
-.home-btn-add {
+.item-btn-add {
   text-align: right;
 }
 
 @media (max-width: 768px) {
-  .home-btn-add {
+  .item-btn-add {
     text-align: center;
   }
 }
