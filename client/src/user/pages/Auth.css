@@ -1,22 +1,3 @@
-/* .authentication__header {
-  color: white;
-  text-align: center;
-}
-
-.authentication {
-  max-width: 25rem;
-  margin: 7rem auto !important;
-  text-align: center;
-}
-
-.authentication form {
- margin: 1rem auto;
-}
-
-.authentication button {
-  margin-right: 0
-} */
-
 .authentication__header {
   color: white;
   text-align: center;
@@ -25,7 +6,7 @@
 .authentication {
   width: 90%;
   max-width: 25rem;
-  margin: 7rem auto;
+  margin: 7rem auto !important;
   text-align: center;
 }
 
