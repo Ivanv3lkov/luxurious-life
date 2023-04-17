@@ -1,4 +1,4 @@
-.authentication__header {
+/* .authentication__header {
   color: white;
   text-align: center;
 }
@@ -11,6 +11,26 @@
 
 .authentication form {
  margin: 1rem auto;
+}
+
+.authentication button {
+  margin-right: 0
+} */
+
+.authentication__header {
+  color: white;
+  text-align: center;
+}
+
+.authentication {
+  width: 90%;
+  max-width: 25rem;
+  margin: 7rem auto;
+  text-align: center;
+}
+
+.authentication form {
+  margin-bottom: 1rem;
 }
 
 .authentication button {

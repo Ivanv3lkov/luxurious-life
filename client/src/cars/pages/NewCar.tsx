@@ -80,7 +80,7 @@ const NewCar = () => {
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="car-form" onSubmit={carSubmitHandler}>
+      <form className="car__form" onSubmit={carSubmitHandler}>
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="model"

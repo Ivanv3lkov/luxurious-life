@@ -20,7 +20,7 @@ exports.getAllCars = async (req, res, next) => {
     const error = new HttpError('Could not find any cars.', 404);
     return next(error);
   }
-  console.log('test');
+
   res.json({ cars: cars.map(car => car.toObject({ getters: true })) });
 };
 

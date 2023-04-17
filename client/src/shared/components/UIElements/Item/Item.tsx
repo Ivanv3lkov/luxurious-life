@@ -13,6 +13,7 @@ import ErrorModal from '../ErrorModal/ErrorModal';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 import './Item.css';
+import Card from '../Card/Card';
 
 export type Props = {
   id: string;
@@ -36,8 +37,6 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
   const isHomePriceless = userId ? diamonds.includes(userId) : false;
 
   const reactToHomeHandler = async (buttonText: string) => {
-    console.log(collectionName);
-
     try {
       const responseData = await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/${collectionName}/${id}/reactions`,
@@ -56,29 +55,32 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
     } catch (err) {}
   };
 
+  if (isLoading) {
+    return (
+      <div className="center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
-      {isLoading && <LoadingSpinner asOverlay />}
-        <div className="item">
+      <li className="item">
+        <Card className="item__content">
+          {isLoading && <LoadingSpinner asOverlay />}
           <div className="item__image">
             <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
           <div className="item__info">
             <h2>{title ? title : model}</h2>
-            <div className="item__reactions">
-              <p>
-                <FaThumbsUp size={30} />
-                {likes.length}
-              </p>
-              <p>
-                <FcLike size={33} />
-                {hearts.length}
-              </p>
-              <p>
-                <IoDiamondSharp size={28} />
-                {diamonds.length}
-              </p>
+            <div className="item__info-reactions">
+              <FaThumbsUp size={26} />
+              <span>{likes.length}</span>
+              <FcLike size={30} />
+              <span>{hearts.length}</span>
+              <IoDiamondSharp size={26} />
+              <span>{diamonds.length}</span>
             </div>
           </div>
           <div className="item__actions">
@@ -88,26 +90,27 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
                 disabled={!userId}
               >
                 <FaThumbsUp size={15} transform={isHomeLiked ? 'scale(1 -1)' : ''} />
-                {isHomeLiked ? 'Unlike' : 'Like'}
+                <span>{isHomeLiked ? 'Unlike' : 'Like'}</span>
               </Button>
               <Button
                 onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
                 disabled={!userId}
               >
                 {isHomeLoved ? <FcDislike size={15} /> : <FcLike size={15} />}
-                {isHomeLoved ? 'Unlove' : 'Love'}
+                <span>{isHomeLoved ? 'Unlove' : 'Love'}</span>
               </Button>
               <Button
                 onClick={(event: any) => reactToHomeHandler(event.currentTarget.textContent)}
                 disabled={!userId}
               >
                 {isHomePriceless ? <GiDiamondHard size={15} /> : <IoDiamondSharp size={15} />}
-                {isHomePriceless ? 'Worthless' : 'Priceless'}
+                <span>{isHomePriceless ? 'Worthless' : 'Priceless'}</span>
               </Button>
               <Button to={`/${collectionName}/${id}/details`}>DETAILS</Button>
             </div>
           </div>
-        </div>
+        </Card>
+      </li>
     </>
   );
 };

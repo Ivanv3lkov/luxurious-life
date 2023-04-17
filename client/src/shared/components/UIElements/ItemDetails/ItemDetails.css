@@ -12,33 +12,30 @@
 }
 
 .item__details {
+  list-style-type: none;
+  padding: 0;
+}
+
+.item__details-content {
   text-align: center;
   width: 45%;
   margin: 0 auto;
 }
 
-.item__details img {
-  margin: 0 auto;
-  display: block;
+.item__details-image img {
   width: 100%;
 }
 
-.item__reactions {
-  text-align: center;
+.item__details-reactions {
   padding: 10px;
 }
 
-.item__reactions p {
-  margin: 0;
-  display: inline;
+.item__details-reactions span {
+  padding: 0 7.5px;
   font-size: 20px;
 }
 
-.item__reactions svg {
-  padding-left: 15px;
-}
-
-.item__actions {
+.item__details-actions {
   padding: 1rem;
   text-align: center;
   border-top: 1px solid #ccc;

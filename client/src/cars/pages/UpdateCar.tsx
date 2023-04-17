@@ -110,7 +110,7 @@ const UpdateCar: React.FC = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedCar && (
-        <form className="car-form" onSubmit={carUpdateSubmitHandler}>
+        <form className="car__form" onSubmit={carUpdateSubmitHandler}>
           <Input
             id="model"
             element="input"
@@ -143,7 +143,7 @@ const UpdateCar: React.FC = () => {
             initialValue={loadedCar.description}
             initialValid={true}
           />
-          <div className="car-form__buttons">
+          <div>
             <Button type="submit" disabled={!formState.isValid}>
               UPDATE CAR
             </Button>

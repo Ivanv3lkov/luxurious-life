@@ -8,7 +8,6 @@ import { logout } from './store/user/userActions';
 import AuthVerify from './shared/hooks/useAuthVerify';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
-import CarDetails from './cars/pages/CarDetails';
 
 const Profile = React.lazy(() => import('./user/pages/Profile'));
 const UpdateProfile = React.lazy(() => import('./user/pages/UpdateProfile'));
@@ -18,7 +17,7 @@ const UserHomes = React.lazy(() => import('./homes/pages/UserHomes'));
 const UserCars = React.lazy(() => import('./cars/pages/UserCars'));
 const AllHomes = React.lazy(() => import('./homes/pages/AllHomes'));
 const NewHome = React.lazy(() => import('./homes/pages/NewHome'));
-const HomeDetails = React.lazy(() => import('./homes/pages/HomeDetails'));
+const ItemDetails = React.lazy(() => import('./shared/components/UIElements/ItemDetails/ItemDetails'));
 const UpdateHome = React.lazy(() => import('./homes/pages/UpdateHome'));
 const AllCars = React.lazy(() => import('./cars/pages/AllCars'));
 const NewCar = React.lazy(() => import('./cars/pages/NewCar'));
@@ -55,7 +54,7 @@ const App = () => {
           <NewHome />
         </Route>
         <Route path="/homes/:homeId/details" exact>
-          <HomeDetails />
+          <ItemDetails />
         </Route>
         <Route path="/homes/:homeId/edit" exact>
           <UpdateHome />
@@ -70,7 +69,7 @@ const App = () => {
           <NewCar />
         </Route>
         <Route path="/cars/:carId/details" exact>
-          <CarDetails />
+          <ItemDetails />
         </Route>
         <Route path="/cars/:carId/edit">
           <UpdateCar />
@@ -100,13 +99,13 @@ const App = () => {
           <AllHomes />
         </Route>
         <Route path="/homes/:homeId/details" exact>
-          <HomeDetails />
+          <ItemDetails />
         </Route>
         <Route path="/cars" exact>
           <AllCars />
         </Route>
         <Route path="/cars/:carId/details" exact>
-          <CarDetails />
+          <ItemDetails />
         </Route>
         <Route path="/auth">
           <Auth />

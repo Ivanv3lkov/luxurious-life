@@ -25,13 +25,15 @@ const ItemList: React.FC<Props> = ({ items, collectionName }) => {
         <Card>
           {urlParams.userId === userId ? (
             <>
-              <h2>No {collectionName} found. Maybe create one?</h2>
-              <Button to={`/${collectionName}/new`}>Add new {collectionName}</Button>
+              <h2>You haven't shared any {collectionName}. Maybe create one?</h2>
+              <Button to={`/${collectionName}/new`}>
+                Add new {collectionName === 'homes' ? 'home' : 'car'}
+              </Button>
             </>
           ) : (
             <>
-              <h2>No {collectionName} found for this user</h2>
-              <Button to="/users">Go back</Button>
+              <h2>No {collectionName} found!</h2>
+              <Button to={urlParams.userId ? `/${urlParams.userId}/items` : `/all-luxuries`}>Go back</Button>
             </>
           )}
         </Card>
@@ -41,12 +43,11 @@ const ItemList: React.FC<Props> = ({ items, collectionName }) => {
 
   return (
     <ul className="item-list">
-      {items.map((item: any ) => (
+      {items.map((item: any) => (
         <Item
           key={item.id}
           id={item.id}
           image={item.image}
-          
           title={item.title}
           model={item.model}
           reactions={item.reactions}
