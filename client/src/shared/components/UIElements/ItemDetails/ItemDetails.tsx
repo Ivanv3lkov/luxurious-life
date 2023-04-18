@@ -137,9 +137,11 @@ const ItemDetails: React.FC = () => {
             </div>
             {userId && (
               <div className="item__details-actions">
-                <Button onClick={openMapHandler} disabled={!userId} inverse>
-                  VIEW ON MAP
-                </Button>
+                {isHomeDetails && (
+                  <Button onClick={openMapHandler} disabled={!userId} inverse>
+                    VIEW ON MAP
+                  </Button>
+                )}
                 {userId === loadedItem.creator && (
                   <>
                     <Button to={`/${isHomeDetails ? 'homes' : 'cars'}/${loadedItem.id}/edit`}>
