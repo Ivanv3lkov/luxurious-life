@@ -3,7 +3,7 @@
 }
 
 .item__link {
-  margin: 0 auto;
+  margin: 0 auto !important;
   margin-top: 15px;
   text-align: center;
 }

@@ -9,12 +9,12 @@ const AllLuxuryItems: React.FC = () => {
     <div className="item__links center">
       <div className="item__link">
         <Link to={`/homes`}>
-          <MdHomeWork color="#0e2f40" size="22rem"/>
+          <MdHomeWork color="#0e2f40" size="20rem"/>
         </Link>
       </div>
       <div className="item__link">
         <Link to={`/cars`}>
-          <IoCarSportSharp color="#0e2f44" size="22rem"/>
+          <IoCarSportSharp color="#0e2f44" size="20rem"/>
         </Link>
       </div>
     </div>
