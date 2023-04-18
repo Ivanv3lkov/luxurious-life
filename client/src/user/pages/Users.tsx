@@ -38,7 +38,7 @@ const Users: React.FC = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedUsers && <UsersList users={loadedUsers} />}
+      {!isLoading && <UsersList users={loadedUsers} />}
     </>
   );
 };
