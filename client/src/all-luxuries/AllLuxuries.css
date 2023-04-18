@@ -6,7 +6,7 @@
 }
 
 .item__link {
-  margin: 0 auto;
+  margin: 0 auto !important;
   width: 375px;
   text-align: center;
 }
