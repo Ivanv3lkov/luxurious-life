@@ -135,8 +135,8 @@ const ItemDetails: React.FC = () => {
               <IoDiamondSharp size={28} />
               <span>{loadedItem.reactions.diamonds.length}</span>
             </div>
-            <div className="item__details-actions">
-              {userId === loadedItem.creator && (
+            {userId === loadedItem.creator && (
+              <div className="item__details-actions">
                 <>
                   {isHomeDetails && (
                     <Button onClick={openMapHandler} disabled={!userId} inverse>
@@ -150,8 +150,8 @@ const ItemDetails: React.FC = () => {
                     DELETE
                   </Button>
                 </>
-              )}
-            </div>
+              </div>
+            )}
           </Card>
         </li>
       )}
