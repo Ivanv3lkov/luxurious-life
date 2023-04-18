@@ -17,6 +17,7 @@ const UserCars: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
 
   useEffect(() => {
+    setLoadedCars([]);
     const fetchCars = async () => {
       try {
         const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/cars/user/${userId}`);
