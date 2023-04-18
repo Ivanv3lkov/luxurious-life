@@ -1,13 +1,23 @@
 .item__links {
+  display: flex;
+  margin: 0 auto;
   flex-wrap: wrap;
+  max-width: 900px;
 }
 
 .item__link {
   margin: 0 auto !important;
-  margin-top: 15px;
+  width: 375px;
   text-align: center;
 }
 
 .item__link:hover {
   cursor: pointer;
+}
+
+@media (max-width: 620px) {
+  .item__link svg {
+    margin: 2rem auto; 
+    height: 14rem;
+  }
 }
