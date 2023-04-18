@@ -135,14 +135,12 @@ const ItemDetails: React.FC = () => {
               <IoDiamondSharp size={28} />
               <span>{loadedItem.reactions.diamonds.length}</span>
             </div>
-            {userId === loadedItem.creator && (
-              <div className="item__details-actions">
+            <div className="item__details-actions">
+              <Button onClick={openMapHandler} disabled={!userId} inverse>
+                VIEW ON MAP
+              </Button>
+              {userId === loadedItem.creator && (
                 <>
-                  {isHomeDetails && (
-                    <Button onClick={openMapHandler} disabled={!userId} inverse>
-                      VIEW ON MAP
-                    </Button>
-                  )}
                   <Button to={`/${isHomeDetails ? 'homes' : 'cars'}/${loadedItem.id}/edit`}>
                     EDIT
                   </Button>
@@ -150,8 +148,8 @@ const ItemDetails: React.FC = () => {
                     DELETE
                   </Button>
                 </>
-              </div>
-            )}
+              )}
+            </div>
           </Card>
         </li>
       )}
