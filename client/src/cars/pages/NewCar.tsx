@@ -9,7 +9,6 @@ import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/valida
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload/ImageUpload';
 
 import './CarForm.css';
@@ -35,7 +34,7 @@ type InitialCarFormInputs = {
 
 const NewCar = () => {
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm<InitialCarFormInputs, boolean>(
     {
       model: {
@@ -81,7 +80,6 @@ const NewCar = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       <form className="car__form" onSubmit={carSubmitHandler}>
-        {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="model"
           element="input"

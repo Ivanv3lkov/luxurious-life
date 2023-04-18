@@ -9,7 +9,6 @@ import { useHttpClient } from '../../shared/hooks/useHttpClient';
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload/ImageUpload';
 
 import './HomeForm.css';
@@ -35,7 +34,7 @@ type InitialHomeFormInputs = {
 
 const NewHome: React.FC = () => {
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm<InitialHomeFormInputs, boolean>(
     {
       title: {
@@ -81,7 +80,6 @@ const NewHome: React.FC = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       <form className="home__form" onSubmit={homeSubmitHandler}>
-        {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="title"
           element="input"
