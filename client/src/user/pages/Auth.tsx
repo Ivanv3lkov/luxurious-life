@@ -8,7 +8,6 @@ import Card from '../../shared/components/UIElements/Card/Card';
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload/ImageUpload';
 import {
   VALIDATOR_EMAIL,
@@ -32,7 +31,7 @@ export type InitialAuthFormInputs = {
 const Auth: React.FC = () => {
   const dispatch = useDispatch();
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm<InitialAuthFormInputs, boolean>(
     {
@@ -122,7 +121,6 @@ const Auth: React.FC = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
-        {isLoading && <LoadingSpinner asOverlay />}
         <h2>{isLoginMode ? 'Login' : 'Registration'}</h2>
         <hr />
         <form onSubmit={authSubmitHandler}>
