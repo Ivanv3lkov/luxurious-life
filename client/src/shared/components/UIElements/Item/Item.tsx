@@ -10,7 +10,6 @@ import { StoreState } from '../../../../store';
 import { useHttpClient } from '../../../../shared/hooks/useHttpClient';
 import Button from '../../FormElements/Button/Button';
 import ErrorModal from '../ErrorModal/ErrorModal';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 import './Item.css';
 import Card from '../Card/Card';
@@ -30,7 +29,7 @@ export type Props = {
 
 const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionName }) => {
   const { accessToken, userId } = useSelector((state: StoreState) => state.user);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [{ likes, hearts, diamonds }, setCarReactions] = useState(reactions);
   const isHomeLiked = userId ? likes.includes(userId) : false;
   const isHomeLoved = userId ? hearts.includes(userId) : false;
@@ -55,20 +54,11 @@ const Item: React.FC<Props> = ({ id, title, model, image, reactions, collectionN
     } catch (err) {}
   };
 
-  if (isLoading) {
-    return (
-      <div className="center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
       <li className="item">
         <Card className="item__content">
-          {isLoading && <LoadingSpinner asOverlay />}
           <div className="item__image">
             <img src={`${process.env.REACT_APP_ASSET_URL}/${image}`} alt="img" />
           </div>
