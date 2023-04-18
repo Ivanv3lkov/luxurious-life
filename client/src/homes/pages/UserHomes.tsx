@@ -6,9 +6,9 @@ import Button from '../../shared/components/FormElements/Button/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/useHttpClient';
+import ItemList from '../../shared/components/UIElements/ItemList/ItemList';
 
 import './UserHomes.css';
-import ItemList from '../../shared/components/UIElements/ItemList/ItemList';
 
 const UserHomes: React.FC = () => {
   const [loadedHomes, setLoadedHomes] = useState<Home[]>([]);
