@@ -1,4 +1,4 @@
-# luxurious-life - Official page: https://luxurious-life09042023.web.app/
+# luxurious-life
 
 ## About the app
 
